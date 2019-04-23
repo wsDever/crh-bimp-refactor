@@ -21,7 +21,7 @@
 - 分享弹出层 `<nb-share>`
 - [x] 限制文本字数的输入框 `<nb-limit-textarea>`
 - 输入校验 `<nb-validator>`
-- tab 内容切换 `<nb-tab>`
+- [x] tab 内容切换 `<nb-tab>`
 - 滚播图 `<nb-swiper>`
 - [x] 下拉刷新（包含上拉刷新） `<nb-refresh>`
 - 二维码展示 `<nb-qrcode>`
