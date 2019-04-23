@@ -1,0 +1,207 @@
+{
+  "tags": [
+    {
+      "label": "nb-actionsheet",
+      "description": "上滑交互框",
+      "attributes": [
+        {
+          "label": "head-title",
+          "description": "展示标题内容 （不用title避免跟原生属性冲突）",
+          "required": false
+        },
+        {
+          "label": "mask",
+          "description": "是否需要遮罩 0 不需要，其他数字代表透明度",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "nb-affix",
+      "description": "固钉组件",
+      "attributes": [
+        {
+          "label": "offset",
+          "description": "距离偏移量后触发（正数举例上沿，负数下沿）",
+          "required": false
+        },
+        {
+          "label": "relative-selector",
+          "description": "计算举例的参照dom",
+          "required": false
+        },
+        {
+          "label": "z-index",
+          "description": "固定时候zindex值",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "nb-badge",
+      "description": "徽标数",
+      "attributes": [
+        {
+          "label": "bg-color",
+          "description": "徽标底色",
+          "required": false
+        },
+        {
+          "label": "count",
+          "description": "展示数字，0为隐藏",
+          "required": false
+        },
+        {
+          "label": "dot",
+          "description": "不展示数字，显示点",
+          "required": false
+        },
+        {
+          "label": "max-count",
+          "description": "count的封顶数值超出则显示 maxCount+",
+          "required": false
+        },
+        {
+          "label": "offset",
+          "description": "位置偏移量",
+          "required": false
+        },
+        {
+          "label": "show-zero",
+          "description": "当count为0的时候也显示",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "nb-list-item",
+      "description": "区块项目",
+      "attributes": [
+        {
+          "label": "border",
+          "description": "下边框, 0则不显示",
+          "required": false
+        },
+        {
+          "label": "color",
+          "description": "线条颜色",
+          "required": false
+        },
+        {
+          "label": "height",
+          "description": "设置单元高度",
+          "required": false
+        },
+        {
+          "label": "short",
+          "description": "短线条方向",
+          "required": false
+        },
+        {
+          "label": "side-space",
+          "description": "设置横线左右间距",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "nb-list",
+      "description": "列表区块",
+      "attributes": [
+        {
+          "label": "top-space",
+          "description": "List之间的间距",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "nb-marquee",
+      "description": "跑马灯H5",
+      "attributes": [
+        {
+          "label": "speed",
+          "description": "多少间隔动一次",
+          "required": false
+        },
+        {
+          "label": "style-id",
+          "description": "跑马灯预设样式",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "nb-pull-to-do",
+      "description": "下滑刷新",
+      "attributes": [
+        {
+          "label": "content-selector",
+          "description": "展示内容选择器",
+          "required": false
+        },
+        {
+          "label": "damp-height",
+          "description": "拉动限制高度",
+          "required": false
+        },
+        {
+          "label": "disable",
+          "description": "禁用哪项功能 refresh: 下拉刷新 | more: 加载更多",
+          "required": false
+        },
+        {
+          "label": "loading",
+          "description": "加载状态",
+          "required": false
+        },
+        {
+          "label": "no-more",
+          "description": "没有更多数据了",
+          "required": false
+        },
+        {
+          "label": "position-save-id",
+          "description": "当浏览器是返回状态是否尝试回到上一次的位置 ID",
+          "required": false
+        },
+        {
+          "label": "wrapper-selector",
+          "description": "实际滚动显示区块选择器",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "nb-switch",
+      "description": "滑动开关",
+      "attributes": [
+        {
+          "label": "checked",
+          "description": "是否默认选中",
+          "required": false
+        },
+        {
+          "label": "color",
+          "description": "开关背景颜色",
+          "required": false
+        },
+        {
+          "label": "disabled",
+          "description": "是否不可修改",
+          "required": false
+        },
+        {
+          "label": "h",
+          "description": "高度",
+          "required": false
+        },
+        {
+          "label": "w",
+          "description": "宽度",
+          "required": false
+        }
+      ]
+    }
+  ]
+}

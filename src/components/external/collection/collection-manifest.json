@@ -1,0 +1,363 @@
+{
+  "components": [
+    {
+      "tag": "nb-actionsheet",
+      "dependencies": [],
+      "componentClass": "Actionsheet",
+      "componentPath": "components/actionsheet/actionsheet.h5.js",
+      "styles": {
+        "$": {
+          "stylePaths": [
+            "components/actionsheet/actionsheet.h5.styl"
+          ]
+        }
+      },
+      "props": [
+        {
+          "name": "headTitle",
+          "type": "String",
+          "attr": "head-title"
+        },
+        {
+          "name": "mask",
+          "type": "Number",
+          "attr": "mask"
+        }
+      ],
+      "states": [
+        {
+          "name": "visible"
+        }
+      ],
+      "methods": [
+        {
+          "name": "close"
+        },
+        {
+          "name": "show"
+        }
+      ],
+      "shadow": true
+    },
+    {
+      "tag": "nb-affix",
+      "dependencies": [],
+      "componentClass": "Affix",
+      "componentPath": "components/affix/affix.js",
+      "styles": {},
+      "props": [
+        {
+          "name": "offset",
+          "type": "Number",
+          "attr": "offset"
+        },
+        {
+          "name": "relativeSelector",
+          "type": "String",
+          "attr": "relative-selector"
+        },
+        {
+          "name": "zIndex",
+          "type": "Number",
+          "attr": "z-index"
+        }
+      ],
+      "states": [
+        {
+          "name": "fixed"
+        }
+      ],
+      "methods": [
+        {
+          "name": "getStartFixedScrollTop"
+        },
+        {
+          "name": "isFixed"
+        }
+      ],
+      "hostElement": {
+        "name": "el"
+      },
+      "events": [
+        {
+          "event": "change"
+        }
+      ],
+      "shadow": true
+    },
+    {
+      "tag": "nb-badge",
+      "dependencies": [],
+      "componentClass": "Badge",
+      "componentPath": "components/badge/badge.h5.js",
+      "styles": {
+        "$": {
+          "stylePaths": [
+            "components/badge/badge.h5.styl"
+          ]
+        }
+      },
+      "props": [
+        {
+          "name": "bgColor",
+          "type": "String",
+          "attr": "bg-color"
+        },
+        {
+          "name": "count",
+          "type": "Number",
+          "attr": "count"
+        },
+        {
+          "name": "dot",
+          "type": "Boolean",
+          "attr": "dot"
+        },
+        {
+          "name": "maxCount",
+          "type": "Number",
+          "attr": "max-count"
+        },
+        {
+          "name": "offset",
+          "type": "Number",
+          "attr": "offset"
+        },
+        {
+          "name": "showZero",
+          "type": "Boolean",
+          "attr": "show-zero"
+        }
+      ],
+      "shadow": true
+    },
+    {
+      "tag": "nb-list",
+      "dependencies": [],
+      "componentClass": "List",
+      "componentPath": "components/list/list.h5.js",
+      "styles": {
+        "$": {
+          "stylePaths": [
+            "components/list/list-item.h5.styl"
+          ]
+        }
+      },
+      "props": [
+        {
+          "name": "topSpace",
+          "type": "Number",
+          "attr": "top-space"
+        }
+      ],
+      "shadow": true
+    },
+    {
+      "tag": "nb-list-item",
+      "dependencies": [],
+      "componentClass": "ListItem",
+      "componentPath": "components/list-item/list-item.h5.js",
+      "styles": {
+        "$": {
+          "stylePaths": [
+            "components/list-item/list-item.h5.styl"
+          ]
+        }
+      },
+      "props": [
+        {
+          "name": "border",
+          "type": "Number",
+          "attr": "border"
+        },
+        {
+          "name": "color",
+          "type": "String",
+          "attr": "color"
+        },
+        {
+          "name": "height",
+          "type": "Number",
+          "attr": "height"
+        },
+        {
+          "name": "short",
+          "type": "String",
+          "attr": "short"
+        },
+        {
+          "name": "sideSpace",
+          "type": "Number",
+          "attr": "side-space"
+        }
+      ],
+      "shadow": true
+    },
+    {
+      "tag": "nb-marquee",
+      "dependencies": [],
+      "componentClass": "Marquee",
+      "componentPath": "components/marquee/marquee.h5.js",
+      "styles": {
+        "$": {
+          "stylePaths": [
+            "components/marquee/marquee.h5.styl"
+          ]
+        }
+      },
+      "props": [
+        {
+          "name": "items",
+          "mutable": true,
+          "attr": "items"
+        },
+        {
+          "name": "speed",
+          "type": "Number",
+          "attr": "speed"
+        },
+        {
+          "name": "styleId",
+          "type": "String",
+          "attr": "style-id"
+        }
+      ],
+      "states": [
+        {
+          "name": "rollupClassName"
+        }
+      ],
+      "shadow": true
+    },
+    {
+      "tag": "nb-pull-to-do",
+      "dependencies": [],
+      "componentClass": "PullToRefresh",
+      "componentPath": "components/pull-to-do/pull-to-do.h5.js",
+      "styles": {
+        "$": {
+          "stylePaths": [
+            "components/pull-to-do/pull-to-do.h5.styl"
+          ]
+        }
+      },
+      "props": [
+        {
+          "name": "contentSelector",
+          "type": "String",
+          "attr": "content-selector"
+        },
+        {
+          "name": "dampHeight",
+          "type": "Number",
+          "attr": "damp-height"
+        },
+        {
+          "name": "disable",
+          "type": "String",
+          "attr": "disable"
+        },
+        {
+          "name": "loading",
+          "type": "Boolean",
+          "mutable": true,
+          "attr": "loading"
+        },
+        {
+          "name": "noMore",
+          "type": "Boolean",
+          "attr": "no-more"
+        },
+        {
+          "name": "positionSaveId",
+          "type": "String",
+          "attr": "position-save-id"
+        },
+        {
+          "name": "wrapperSelector",
+          "type": "String",
+          "attr": "wrapper-selector"
+        }
+      ],
+      "states": [
+        {
+          "name": "dampingLen"
+        }
+      ],
+      "methods": [
+        {
+          "name": "done"
+        },
+        {
+          "name": "restoreLastPosition"
+        }
+      ],
+      "hostElement": {
+        "name": "el"
+      },
+      "events": [
+        {
+          "event": "more"
+        },
+        {
+          "event": "refresh"
+        }
+      ],
+      "shadow": true
+    },
+    {
+      "tag": "nb-switch",
+      "dependencies": [],
+      "componentClass": "Switch",
+      "componentPath": "components/switch/switch.h5.js",
+      "styles": {
+        "$": {
+          "stylePaths": [
+            "components/switch/switch.h5.styl"
+          ]
+        }
+      },
+      "props": [
+        {
+          "name": "checked",
+          "type": "Boolean",
+          "mutable": true,
+          "attr": "checked"
+        },
+        {
+          "name": "color",
+          "type": "String",
+          "attr": "color"
+        },
+        {
+          "name": "disabled",
+          "type": "Boolean",
+          "attr": "disabled"
+        },
+        {
+          "name": "h",
+          "type": "Number",
+          "attr": "h"
+        },
+        {
+          "name": "w",
+          "type": "Number",
+          "attr": "w"
+        }
+      ],
+      "events": [
+        {
+          "event": "change"
+        }
+      ],
+      "shadow": true
+    }
+  ],
+  "collections": [],
+  "compiler": {
+    "name": "@stencil/core",
+    "version": "0.18.1",
+    "typescriptVersion": "3.3.3"
+  },
+  "bundles": []
+}
