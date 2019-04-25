@@ -26,7 +26,8 @@
 - [x] 下拉刷新（包含上拉刷新） `<nb-refresh>`
 - 二维码展示 `<nb-qrcode>`
 - 图片裁切 `<nb-cropper>`
-- 按照字母滑动导航列表 `<nb-vscroll-nav>`
+- [x] 按照字母滑动导航列表 `<nb-vscroll-nav>`
+- [x] 图片多张上传组件 `<nb-upload-simple-image>`
 - ...
 
 `common` 内的为 vue 的公共组件，只能跟 vue 捆绑使用的复用组件放置在此，比如页面过渡组件， 这里可以创建其客户 ID 目录（如果有必要）一般是非容器组件又复用性较强的
