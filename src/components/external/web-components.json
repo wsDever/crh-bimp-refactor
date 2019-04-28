@@ -74,6 +74,42 @@
       ]
     },
     {
+      "label": "nb-header-nav",
+      "description": "头部h5导航组件",
+      "attributes": [
+        {
+          "label": "fixed",
+          "description": "是否固定悬浮在顶部 z-index 值",
+          "required": false
+        },
+        {
+          "label": "line",
+          "description": "有下划线",
+          "required": false
+        },
+        {
+          "label": "space",
+          "description": "左右间距",
+          "required": false
+        },
+        {
+          "label": "styles",
+          "description": "设置样式合集",
+          "required": false
+        },
+        {
+          "label": "title-position",
+          "description": "标题显示位置",
+          "required": false
+        },
+        {
+          "label": "visible",
+          "description": "是否显示",
+          "required": false
+        }
+      ]
+    },
+    {
       "label": "nb-list-item",
       "description": "区块项目",
       "attributes": [
@@ -100,6 +136,11 @@
         {
           "label": "side-space",
           "description": "设置横线左右间距",
+          "required": false
+        },
+        {
+          "label": "slide",
+          "description": "是否启用横滑操作开关",
           "required": false
         }
       ]
@@ -132,42 +173,99 @@
       ]
     },
     {
-      "label": "nb-pull-to-do",
-      "description": "下滑刷新",
+      "label": "nb-refresh",
+      "description": "miniRefresh封装，API地址：\nhttp://www.minirefresh.com/minirefresh-doc/api/api_minirefresh.html",
       "attributes": [
         {
-          "label": "content-selector",
-          "description": "展示内容选择器",
+          "label": "auto-scroll-load",
+          "description": "自动执行一次上拉加载",
           "required": false
         },
         {
-          "label": "damp-height",
-          "description": "拉动限制高度",
+          "label": "lock-refresh",
+          "description": "禁用下拉刷新",
           "required": false
         },
         {
-          "label": "disable",
-          "description": "禁用哪项功能 refresh: 下拉刷新 | more: 加载更多",
+          "label": "lock-scroll-load",
+          "description": "禁用上拉加载更多",
           "required": false
         },
         {
-          "label": "loading",
-          "description": "加载状态",
+          "label": "offset",
+          "description": "上下拉动的阀值",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "nb-modal",
+      "description": "弹窗提示",
+      "attributes": [
+        {
+          "label": "head-title",
+          "description": "标题（不填则去掉头部区域）",
           "required": false
         },
         {
-          "label": "no-more",
-          "description": "没有更多数据了",
+          "label": "no-text",
+          "description": "当弹窗类型是 confirm 时取消按钮文案",
           "required": false
         },
         {
-          "label": "position-save-id",
-          "description": "当浏览器是返回状态是否尝试回到上一次的位置 ID",
+          "label": "ok-text",
+          "description": "当弹窗类型是 alert, confirm 时确认按钮文案",
           "required": false
         },
         {
-          "label": "wrapper-selector",
-          "description": "实际滚动显示区块选择器",
+          "label": "position",
+          "description": "显示位置",
+          "required": false
+        },
+        {
+          "label": "theme",
+          "description": "样式定义",
+          "required": false
+        },
+        {
+          "label": "type",
+          "description": "弹窗类型",
+          "required": false
+        },
+        {
+          "label": "visible",
+          "description": "可见开关",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "nb-search-bar",
+      "description": "搜索框",
+      "attributes": [
+        {
+          "label": "cancel-text",
+          "description": "取消操作文案",
+          "required": false
+        },
+        {
+          "label": "max-length",
+          "description": "输入框最大长度限制",
+          "required": false
+        },
+        {
+          "label": "placeholder",
+          "description": "搜索框内的提示文案",
+          "required": false
+        },
+        {
+          "label": "search-delay",
+          "description": "搜索触发延迟",
+          "required": false
+        },
+        {
+          "label": "value",
+          "description": "输入框内的值（可变化反射）",
           "required": false
         }
       ]
@@ -199,6 +297,53 @@
         {
           "label": "w",
           "description": "宽度",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "nb-toast",
+      "description": "轻提示",
+      "attributes": [
+        {
+          "label": "duration",
+          "description": "消失延时时间 0 -> 不自动消失",
+          "required": false
+        },
+        {
+          "label": "max-length",
+          "description": "最大显示宽度",
+          "required": false
+        },
+        {
+          "label": "position",
+          "description": "显示位置",
+          "required": false
+        },
+        {
+          "label": "theme",
+          "description": "样式定义",
+          "required": false
+        },
+        {
+          "label": "visible",
+          "description": "可见开关",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "nb-vscroll-nav",
+      "description": "仿通讯录侧边垂直滑动定位条",
+      "attributes": [
+        {
+          "label": "id-prefix",
+          "description": "定义滚动元素 id 的前置与选中的keyword 合并成完整的 id\neg：'vscroll-' + 'A' -> id='vscroll-A'",
+          "required": false
+        },
+        {
+          "label": "scroller",
+          "description": "包裹可滚动的容器，不填写的话默认为window级别滚动",
           "required": false
         }
       ]

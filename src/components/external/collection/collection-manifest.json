@@ -132,6 +132,57 @@
       "shadow": true
     },
     {
+      "tag": "nb-header-nav",
+      "dependencies": [],
+      "componentClass": "HeaderNav",
+      "componentPath": "components/header/nav.h5.js",
+      "styles": {
+        "$": {
+          "stylePaths": [
+            "components/header/nav.h5.styl"
+          ]
+        }
+      },
+      "props": [
+        {
+          "name": "fixed",
+          "type": "Number",
+          "attr": "fixed"
+        },
+        {
+          "name": "line",
+          "type": "Boolean",
+          "attr": "line"
+        },
+        {
+          "name": "space",
+          "type": "Number",
+          "attr": "space"
+        },
+        {
+          "name": "styles",
+          "type": "Any",
+          "attr": "styles"
+        },
+        {
+          "name": "titlePosition",
+          "type": "String",
+          "attr": "title-position"
+        },
+        {
+          "name": "visible",
+          "type": "Boolean",
+          "attr": "visible"
+        }
+      ],
+      "events": [
+        {
+          "event": "tap"
+        }
+      ],
+      "shadow": true
+    },
+    {
       "tag": "nb-list",
       "dependencies": [],
       "componentClass": "List",
@@ -189,6 +240,16 @@
           "name": "sideSpace",
           "type": "Number",
           "attr": "side-space"
+        },
+        {
+          "name": "slide",
+          "type": "Boolean",
+          "attr": "slide"
+        }
+      ],
+      "states": [
+        {
+          "name": "slideIn"
         }
       ],
       "shadow": true
@@ -230,66 +291,135 @@
       "shadow": true
     },
     {
-      "tag": "nb-pull-to-do",
+      "tag": "nb-modal",
       "dependencies": [],
-      "componentClass": "PullToRefresh",
-      "componentPath": "components/pull-to-do/pull-to-do.h5.js",
+      "componentClass": "Modal",
+      "componentPath": "components/modal/modal.h5.js",
       "styles": {
         "$": {
           "stylePaths": [
-            "components/pull-to-do/pull-to-do.h5.styl"
+            "components/modal/modal.h5.styl"
           ]
         }
       },
       "props": [
         {
-          "name": "contentSelector",
+          "name": "headTitle",
           "type": "String",
-          "attr": "content-selector"
+          "mutable": true,
+          "attr": "head-title"
         },
         {
-          "name": "dampHeight",
-          "type": "Number",
-          "attr": "damp-height"
-        },
-        {
-          "name": "disable",
+          "name": "noText",
           "type": "String",
-          "attr": "disable"
+          "mutable": true,
+          "attr": "no-text"
         },
         {
-          "name": "loading",
+          "name": "okText",
+          "type": "String",
+          "mutable": true,
+          "attr": "ok-text"
+        },
+        {
+          "name": "onNo",
+          "mutable": true,
+          "attr": "on-no"
+        },
+        {
+          "name": "onOk",
+          "mutable": true,
+          "attr": "on-ok"
+        },
+        {
+          "name": "position",
+          "type": "String",
+          "mutable": true,
+          "attr": "position"
+        },
+        {
+          "name": "theme",
+          "type": "String",
+          "attr": "theme"
+        },
+        {
+          "name": "type",
+          "type": "String",
+          "mutable": true,
+          "reflectToAttr": true,
+          "attr": "type"
+        },
+        {
+          "name": "visible",
           "type": "Boolean",
           "mutable": true,
-          "attr": "loading"
-        },
-        {
-          "name": "noMore",
-          "type": "Boolean",
-          "attr": "no-more"
-        },
-        {
-          "name": "positionSaveId",
-          "type": "String",
-          "attr": "position-save-id"
-        },
-        {
-          "name": "wrapperSelector",
-          "type": "String",
-          "attr": "wrapper-selector"
+          "reflectToAttr": true,
+          "attr": "visible",
+          "watch": [
+            "onVisibleChange"
+          ]
         }
       ],
       "states": [
         {
-          "name": "dampingLen"
+          "name": "transition"
         }
       ],
       "methods": [
         {
-          "name": "done"
+          "name": "show"
+        }
+      ],
+      "hostElement": {
+        "name": "el"
+      },
+      "shadow": true
+    },
+    {
+      "tag": "nb-refresh",
+      "dependencies": [],
+      "componentClass": "Refresh",
+      "componentPath": "components/minirefresh/refresh.h5.js",
+      "styles": {
+        "$": {
+          "stylePaths": [
+            "components/minirefresh/refresh.h5.styl"
+          ]
+        }
+      },
+      "props": [
+        {
+          "name": "autoScrollLoad",
+          "type": "Boolean",
+          "attr": "auto-scroll-load"
         },
         {
-          "name": "restoreLastPosition"
+          "name": "lockRefresh",
+          "type": "Boolean",
+          "attr": "lock-refresh"
+        },
+        {
+          "name": "lockScrollLoad",
+          "type": "Boolean",
+          "attr": "lock-scroll-load"
+        },
+        {
+          "name": "offset",
+          "type": "Number",
+          "attr": "offset"
+        },
+        {
+          "name": "refreshOptions",
+          "attr": "refresh-options"
+        },
+        {
+          "name": "scrollLoadOptions",
+          "attr": "scroll-load-options"
+        }
+      ],
+      "methods": [
+        {
+          "name": "getRefresh"
         }
       ],
       "hostElement": {
@@ -297,10 +427,79 @@
       },
       "events": [
         {
-          "event": "more"
+          "event": "refresh"
         },
         {
-          "event": "refresh"
+          "event": "scrollLoad"
+        }
+      ],
+      "shadow": true
+    },
+    {
+      "tag": "nb-search-bar",
+      "dependencies": [],
+      "componentClass": "SearchBar",
+      "componentPath": "components/search-bar/search-bar.h5.js",
+      "styles": {
+        "$": {
+          "stylePaths": [
+            "components/search-bar/search-bar.h5.styl"
+          ]
+        }
+      },
+      "props": [
+        {
+          "name": "cancelText",
+          "type": "String",
+          "attr": "cancel-text"
+        },
+        {
+          "name": "maxLength",
+          "type": "Number",
+          "attr": "max-length"
+        },
+        {
+          "name": "placeholder",
+          "type": "String",
+          "attr": "placeholder"
+        },
+        {
+          "name": "searchDelay",
+          "type": "Number",
+          "attr": "search-delay"
+        },
+        {
+          "name": "value",
+          "type": "String",
+          "mutable": true,
+          "attr": "value"
+        }
+      ],
+      "states": [
+        {
+          "name": "isInputFocus"
+        }
+      ],
+      "methods": [
+        {
+          "name": "cancelSearch"
+        },
+        {
+          "name": "removeValue"
+        },
+        {
+          "name": "submitForm"
+        }
+      ],
+      "events": [
+        {
+          "event": "focusChange"
+        },
+        {
+          "event": "search"
+        },
+        {
+          "event": "submit"
         }
       ],
       "shadow": true
@@ -348,6 +547,108 @@
       "events": [
         {
           "event": "change"
+        }
+      ],
+      "shadow": true
+    },
+    {
+      "tag": "nb-toast",
+      "dependencies": [],
+      "componentClass": "Toast",
+      "componentPath": "components/toast/toast.h5.js",
+      "styles": {
+        "$": {
+          "stylePaths": [
+            "components/toast/toast.h5.styl"
+          ]
+        }
+      },
+      "props": [
+        {
+          "name": "duration",
+          "type": "Number",
+          "attr": "duration"
+        },
+        {
+          "name": "maxLength",
+          "type": "Number",
+          "attr": "max-length"
+        },
+        {
+          "name": "position",
+          "type": "String",
+          "attr": "position"
+        },
+        {
+          "name": "theme",
+          "type": "String",
+          "attr": "theme"
+        },
+        {
+          "name": "visible",
+          "type": "Boolean",
+          "mutable": true,
+          "reflectToAttr": true,
+          "attr": "visible",
+          "watch": [
+            "onVisibleChange"
+          ]
+        }
+      ],
+      "states": [
+        {
+          "name": "transition"
+        }
+      ],
+      "methods": [
+        {
+          "name": "show"
+        }
+      ],
+      "hostElement": {
+        "name": "el"
+      },
+      "shadow": true
+    },
+    {
+      "tag": "nb-vscroll-nav",
+      "dependencies": [],
+      "componentClass": "VscrollNav",
+      "componentPath": "components/vscroll-nav/vscroll-nav.h5.js",
+      "styles": {
+        "$": {
+          "stylePaths": [
+            "components/vscroll-nav/vscroll-nav.h5.styl"
+          ]
+        }
+      },
+      "props": [
+        {
+          "name": "idPrefix",
+          "type": "String",
+          "attr": "id-prefix"
+        },
+        {
+          "name": "keywords",
+          "attr": "keywords"
+        },
+        {
+          "name": "scroller",
+          "type": "String",
+          "attr": "scroller"
+        }
+      ],
+      "methods": [
+        {
+          "name": "scrollToId"
+        }
+      ],
+      "hostElement": {
+        "name": "el"
+      },
+      "events": [
+        {
+          "event": "scrollTo"
         }
       ],
       "shadow": true

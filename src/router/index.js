@@ -7,6 +7,11 @@ Vue.use(Router);
 let router = new Router({
   routes: [
     // 基础路由
+    {
+      name: 'login',
+      path: '/login',
+      component: () => import(/* webpackChunkName: "login" */ '@page/login')
+    }
   ]
 });
 

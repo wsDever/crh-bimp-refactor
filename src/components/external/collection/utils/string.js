@@ -11,3 +11,13 @@ export const search2obj = (hash = '') => {
     }
     return ret;
 };
+export const serialize = obj => {
+    Object.keys(obj)
+        .map(k => {
+        if (~Object.prototype.toString.call(obj[k]).search(/Array|Object/)) {
+            obj[k] = JSON.stringify(obj[k]);
+        }
+        return `${encodeURIComponent(k)}=${encodeURIComponent(obj[k])}`;
+    })
+        .join('&');
+};

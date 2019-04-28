@@ -70,6 +70,6 @@
 
   .fade-enter,
   .fade-leave-active {
-    opacity: 0.3;
+    opacity: 0.2;
   }
 </style>

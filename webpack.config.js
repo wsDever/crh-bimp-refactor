@@ -41,6 +41,7 @@ let config = {
       '@assets': setPath(`src/assets/${CLIENT}`),
       '@lib': setPath('src/libs'),
       '@page': setPath(`src/apps/${CLIENT}/pages`),
+      '@config': setPath(`src/config`),
       '@model': setPath(`src/models/${CLIENT}`),
       '@com': setPath(`src/components`)
     },
@@ -165,12 +166,13 @@ let config = {
    * 优化配置
    */
   optimization: {
+    runtimeChunk: 'single',
     splitChunks: {
       cacheGroups: {
-        common: {
-          name: 'common',
-          chunks: 'all',
-          minChunks: 2
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all'
         }
       }
     }
@@ -210,7 +212,7 @@ if (ENV === 'development') {
  */
 if (ENV !== 'development') {
   config.output = {
-    filename: 'script/[name].[chunkhash:5].js',
+    filename: 'script/[name].[contenthash].js',
     path: setPath(`dist/${CLIENT}/${Date.now()}`),
     publicPath: ''
   };

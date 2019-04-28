@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var tslib_1 = require("../polyfills/tslib.js");
+var nb_component_core_js_1 = require("../nb-component.core.js");
+var VscrollNav = function () { function e() { this.keywords = ["A", "B"], this.idPrefix = "vscroll-", this.scroller = null; } return e.prototype.scrollToId = function (e) { return tslib_1.__awaiter(this, void 0, void 0, function () { var r, t, o; return tslib_1.__generator(this, function (n) { if (!(r = this.el.querySelector("#" + e)))
+    return [2, !1]; if (t = r.offsetTop, this.scroller) {
+    if (!(o = document.querySelector(this.scroller)))
+        return [2, !1];
+    o.scrollTop = t;
+}
+else
+    window.scrollTo(0, t); return this.scrollTo.emit({ y: t }), [2, t]; }); }); }, e.prototype.onNavClick = function (e) { var r = e.target.innerText; ~this.keywords.indexOf(r) && this.scrollToId("" + this.idPrefix + r); }, e.prototype.onNavMove = function (e) { var r = e.changedTouches[0], t = this.el.shadowRoot.elementFromPoint(r.clientX, r.clientY), o = t ? t.innerHTML : ""; ~this.keywords.indexOf(o) && this.scrollToId("" + this.idPrefix + o); }, e.prototype.render = function () { return nb_component_core_js_1.h("div", { class: "vscroll-nav" }, nb_component_core_js_1.h("div", { class: "list" }, nb_component_core_js_1.h("slot", null)), nb_component_core_js_1.h("ul", { class: "nav", onClick: this.onNavClick.bind(this), onTouchMove: this.onNavMove.bind(this) }, this.keywords.map(function (e) { return nb_component_core_js_1.h("li", { key: e }, e); }))); }, Object.defineProperty(e, "is", { get: function () { return "nb-vscroll-nav"; }, enumerable: !0, configurable: !0 }), Object.defineProperty(e, "encapsulation", { get: function () { return "shadow"; }, enumerable: !0, configurable: !0 }), Object.defineProperty(e, "properties", { get: function () { return { el: { elementRef: !0 }, idPrefix: { type: String, attr: "id-prefix" }, keywords: { type: "Any", attr: "keywords" }, scroller: { type: String, attr: "scroller" }, scrollToId: { method: !0 } }; }, enumerable: !0, configurable: !0 }), Object.defineProperty(e, "events", { get: function () { return [{ name: "scrollTo", method: "scrollTo", bubbles: !0, cancelable: !0, composed: !0 }]; }, enumerable: !0, configurable: !0 }), Object.defineProperty(e, "style", { get: function () { return ".vscroll-nav.sc-nb-vscroll-nav   .nav.sc-nb-vscroll-nav{list-style:none;position:fixed;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);right:.24rem;color:#8c8c8c;font-size:.32rem;line-height:.3466666666666667rem;z-index:99}"; }, enumerable: !0, configurable: !0 }), e; }();
+exports.NbVscrollNav = VscrollNav;
