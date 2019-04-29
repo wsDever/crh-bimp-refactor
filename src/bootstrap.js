@@ -1,20 +1,23 @@
 import Vue from 'vue';
 import router from './router';
+import { configure } from 'mobx';
+import Config from '@config';
 
 // 全局样式
 import '@assets/main';
-
 // 启用 rem
 import '@lib/rem';
-
 // 工具函数
 import Utils from '@lib/utils';
-
 // API观察者
 import { APIObserver } from '@lib/xhr';
-
 // 外部引入标准组件
 import { defineCustomElements } from '@com/external/loader';
+
+// Mobx 设置为严格模式
+configure({ enforceActions: 'always' });
+
+// 注册标准组件到全局
 defineCustomElements(window);
 Vue.config.ignoredElements = [/nb-\w*/];
 
@@ -28,10 +31,6 @@ APIObserver.on('response.error', ({ msg }) => {
   const App = await import(
     /* webpackChunkName: "app-root" */ `./apps/${__CLIENT__}/app`
   );
-
-  // 全局配置
-  const ConfigPromise = await import('./config');
-  const Config = await ConfigPromise.default;
 
   // Vue 全局设置
   Vue.productionTip = false;

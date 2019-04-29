@@ -2,6 +2,7 @@
 import Utils from '@lib/utils';
 import Axios from 'axios';
 import Ebus from '@lib/ebus';
+import Config from '@config';
 
 /**
  * 创建API相关的观察者
@@ -9,7 +10,9 @@ import Ebus from '@lib/ebus';
 const APIObserver = new Ebus();
 
 // API请求配置
-const XHR = Axios.create();
+const XHR = Axios.create({
+  withCredentials: false
+});
 
 // 全局请求信息配置
 XHR.interceptors.request.use(
@@ -17,7 +20,9 @@ XHR.interceptors.request.use(
     if (config.method === 'post') {
       config.data = Utils.url.serialize(config.data);
     }
+    console.log(config);
     config.headers = {
+      token: sessionStorage.getItem(Config.tokenSessName) || '',
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
       // 'Content-Type': 'application/json; charset=UTF-8'
     };

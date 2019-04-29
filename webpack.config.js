@@ -190,7 +190,6 @@ if (ENV === 'development') {
     clientLogLevel: 'warning',
     hot: true,
     host: '0.0.0.0',
-    // port: '8080',
     stats: {
       assets: true,
       performance: true,
