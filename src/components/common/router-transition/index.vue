@@ -41,7 +41,7 @@
     beforeLeave(element) {
       this.prevHeight = getComputedStyle(element).height;
       // 避免在切换效果的时候残留一些无样式的内容
-      element.style.visibility = 'hidden';
+      // element.style.visibility = 'hidden';
     }
 
     enter(element) {
@@ -67,7 +67,7 @@
 <style lang="scss" scoped>
   .fade-enter-active,
   .fade-leave-active {
-    transition: opacity 0.2s ease;
+    transition: height, opacity 0.2s ease;
   }
 
   .fade-enter,

@@ -10,4 +10,4 @@ export declare const search2obj: any;
  * @param  {Object} obj
  * @return {String}
  */
-export declare const serialize: (obj: any) => void;
+export declare const serialize: (obj: any) => string;

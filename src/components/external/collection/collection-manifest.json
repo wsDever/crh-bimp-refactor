@@ -132,6 +132,164 @@
       "shadow": true
     },
     {
+      "tag": "nb-button-async",
+      "dependencies": [],
+      "componentClass": "ButtonAsync",
+      "componentPath": "components/button/async/button-async.h5.js",
+      "styles": {
+        "$": {
+          "stylePaths": [
+            "components/button/async/button-async.h5.styl"
+          ]
+        }
+      },
+      "props": [
+        {
+          "name": "bg",
+          "type": "String",
+          "attr": "bg"
+        },
+        {
+          "name": "color",
+          "type": "String",
+          "attr": "color"
+        },
+        {
+          "name": "countdown",
+          "type": "Number",
+          "attr": "countdown"
+        },
+        {
+          "name": "countdownContainer",
+          "type": "String",
+          "attr": "countdown-container"
+        },
+        {
+          "name": "countdownUnit",
+          "type": "String",
+          "attr": "countdown-unit"
+        },
+        {
+          "name": "disable",
+          "type": "Boolean",
+          "mutable": true,
+          "attr": "disable"
+        },
+        {
+          "name": "height",
+          "type": "Number",
+          "attr": "height"
+        },
+        {
+          "name": "loading",
+          "type": "Boolean",
+          "mutable": true,
+          "attr": "loading"
+        },
+        {
+          "name": "noBorder",
+          "type": "Boolean",
+          "attr": "no-border"
+        },
+        {
+          "name": "radius",
+          "type": "Number",
+          "attr": "radius"
+        },
+        {
+          "name": "width",
+          "type": "Number",
+          "attr": "width"
+        }
+      ],
+      "states": [
+        {
+          "name": "countdownDisplay"
+        }
+      ],
+      "methods": [
+        {
+          "name": "done"
+        }
+      ],
+      "hostElement": {
+        "name": "el"
+      },
+      "events": [
+        {
+          "event": "count"
+        },
+        {
+          "event": "tap"
+        }
+      ],
+      "shadow": true
+    },
+    {
+      "tag": "nb-datetime-picker",
+      "dependencies": [],
+      "componentClass": "DatetimePicker",
+      "componentPath": "components/picker/datetime/picker.h5.js",
+      "styles": {
+        "$": {
+          "stylePaths": [
+            "components/picker/datetime/picker.h5.styl"
+          ]
+        }
+      },
+      "props": [
+        {
+          "name": "date",
+          "type": "Any",
+          "attr": "date"
+        },
+        {
+          "name": "for",
+          "type": "String",
+          "attr": "for"
+        },
+        {
+          "name": "format",
+          "type": "String",
+          "attr": "format"
+        },
+        {
+          "name": "rows",
+          "type": "Number",
+          "attr": "rows"
+        },
+        {
+          "name": "textCancel",
+          "type": "String",
+          "attr": "text-cancel"
+        },
+        {
+          "name": "textConfirm",
+          "type": "String",
+          "attr": "text-confirm"
+        },
+        {
+          "name": "textTitle",
+          "type": "String",
+          "attr": "text-title"
+        }
+      ],
+      "methods": [
+        {
+          "name": "getPicker"
+        }
+      ],
+      "hostElement": {
+        "name": "el"
+      },
+      "events": [
+        {
+          "event": "ready"
+        }
+      ],
+      "shadow": true
+    },
+    {
       "tag": "nb-header-nav",
       "dependencies": [],
       "componentClass": "HeaderNav",
@@ -178,6 +336,55 @@
       "events": [
         {
           "event": "tap"
+        }
+      ],
+      "shadow": true
+    },
+    {
+      "tag": "nb-limit-textarea",
+      "dependencies": [],
+      "componentClass": "LimitTextara",
+      "componentPath": "components/textarea/limit/limit-textarea.h5.js",
+      "styles": {
+        "$": {
+          "stylePaths": [
+            "components/textarea/limit/limit-textarea.h5.styl"
+          ]
+        }
+      },
+      "props": [
+        {
+          "name": "height",
+          "type": "Number",
+          "attr": "height"
+        },
+        {
+          "name": "limit",
+          "type": "Number",
+          "attr": "limit"
+        },
+        {
+          "name": "placeholder",
+          "type": "String",
+          "attr": "placeholder"
+        }
+      ],
+      "states": [
+        {
+          "name": "text"
+        }
+      ],
+      "methods": [
+        {
+          "name": "getContent"
+        }
+      ],
+      "hostElement": {
+        "name": "el"
+      },
+      "events": [
+        {
+          "event": "ready"
         }
       ],
       "shadow": true
@@ -505,6 +712,35 @@
       "shadow": true
     },
     {
+      "tag": "nb-string-limit",
+      "dependencies": [],
+      "componentClass": "StringLimit",
+      "componentPath": "components/string/limit-line/string-limit.js",
+      "styles": {
+        "$": {
+          "stylePaths": [
+            "components/string/limit-line/string-limit.styl"
+          ]
+        }
+      },
+      "props": [
+        {
+          "name": "mode",
+          "type": "String",
+          "attr": "mode"
+        },
+        {
+          "name": "number",
+          "type": "Number",
+          "attr": "number"
+        }
+      ],
+      "hostElement": {
+        "name": "el"
+      },
+      "shadow": true
+    },
+    {
       "tag": "nb-switch",
       "dependencies": [],
       "componentClass": "Switch",
@@ -544,6 +780,59 @@
           "attr": "w"
         }
       ],
+      "events": [
+        {
+          "event": "change"
+        }
+      ],
+      "shadow": true
+    },
+    {
+      "tag": "nb-tab-slide",
+      "dependencies": [],
+      "componentClass": "TabSlide",
+      "componentPath": "components/tab/slide/tab-slide.h5.js",
+      "styles": {
+        "$": {
+          "stylePaths": [
+            "components/tab/slide/tab-slide.h5.styl"
+          ]
+        }
+      },
+      "props": [
+        {
+          "name": "height",
+          "type": "Number",
+          "attr": "height"
+        },
+        {
+          "name": "index",
+          "type": "Number",
+          "mutable": true,
+          "attr": "index",
+          "watch": [
+            "onIndexChange"
+          ]
+        },
+        {
+          "name": "position",
+          "type": "String",
+          "attr": "position"
+        },
+        {
+          "name": "width",
+          "type": "Number",
+          "attr": "width"
+        }
+      ],
+      "states": [
+        {
+          "name": "slideLeft"
+        }
+      ],
+      "hostElement": {
+        "name": "el"
+      },
       "events": [
         {
           "event": "change"
@@ -608,6 +897,68 @@
       "hostElement": {
         "name": "el"
       },
+      "shadow": true
+    },
+    {
+      "tag": "nb-upload-simple-image",
+      "dependencies": [],
+      "componentClass": "UploadSimpleImage",
+      "componentPath": "components/upload/simple-image/simple-image.h5.js",
+      "styles": {
+        "$": {
+          "stylePaths": [
+            "components/upload/simple-image/simple-image.h5.styl"
+          ]
+        }
+      },
+      "props": [
+        {
+          "name": "imageSize",
+          "type": "Number",
+          "attr": "image-size"
+        },
+        {
+          "name": "maxLength",
+          "type": "Number",
+          "attr": "max-length"
+        },
+        {
+          "name": "previewSize",
+          "type": "Number",
+          "attr": "preview-size"
+        },
+        {
+          "name": "rate",
+          "type": "Number",
+          "attr": "rate"
+        },
+        {
+          "name": "uploadText",
+          "type": "String",
+          "attr": "upload-text"
+        }
+      ],
+      "states": [
+        {
+          "name": "loading"
+        },
+        {
+          "name": "previewImages"
+        }
+      ],
+      "methods": [
+        {
+          "name": "getImages"
+        }
+      ],
+      "events": [
+        {
+          "event": "change"
+        },
+        {
+          "event": "error"
+        }
+      ],
       "shadow": true
     },
     {

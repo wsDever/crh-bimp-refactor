@@ -96,7 +96,7 @@ let config = {
           {
             loader: 'sass-loader',
             options: {
-              import: [setPath(`src/assets/${CLIENT}/var`)]
+              data: `@import "~@assets/var.scss";`
             }
           }
         ]

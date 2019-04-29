@@ -1,0 +1,45 @@
+.login {
+  @include wrapper;
+
+  h1 {
+    font-size: 64px;
+    color: $font-dark-grey;
+    margin: 138px 0 0 0;
+  }
+  p {
+    font-size: 26px;
+    color: $font-light-grey;
+    margin: 10px 0 70px 0;
+  }
+  form {
+    input {
+      background: $layout-bg-color;
+      font-size: 32px;
+      border: none;
+      height: 88px;
+      width: 690px;
+      margin-bottom: 40px;
+      border-radius: 10px;
+      outline: none;
+      &[type=password] {
+        margin-bottom: 60px;
+      }
+    }
+
+    .btn {
+      font-size: 36px;
+    }
+
+    .links {
+      display: flex;
+      justify-content: space-between;
+      width: 690px;
+      font-size: 32px;
+      margin-top: 40px;
+      a {
+        font-size: 32px;
+        color: $font-middle-grey;
+      }
+    }
+  }
+}

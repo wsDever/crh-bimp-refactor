@@ -12,29 +12,51 @@ body {
   font-size: 28px;
 }
 
+input {
+  box-sizing: border-box;
+  padding: 0 20px;
+  outline: none;
+
+  &::placeholder {
+    color: #BFBFBF;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: $brand-primary-color;
+}
+
+nb-header-nav {
+  .left,
+  .title,
+  .right {
+    display: block;
+    i {
+      // 图标统一尺寸
+      font-size: 40px;
+    }
+  }
+  .left {
+    min-width: 100px;
+  }
+  .title {
+    min-width: 490px;
+    &.center {
+      text-align: center;
+      font-size: 36px;
+    }
+  }
+  .right {
+    min-width: 100px;
+  }
+}
+
 #app {
-  nb-header-nav {
-    .left,
-    .title,
-    .right {
-      display: block;
-      i {
-        // 图标统一尺寸
-        font-size: 40px;
-      }
-    }
-    .left {
-      min-width: 100px;
-    }
-    .title {
-      min-width: 490px;
-      &.center {
-        text-align: center;
-        font-size: 36px;
-      }
-    }
-    .right {
-      min-width: 100px;
-    }
+  height: 100vh;
+  overflow: scroll;
+
+  &.grey {
+    background: $layout-bg-color;
   }
 }

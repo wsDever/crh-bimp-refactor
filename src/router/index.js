@@ -20,7 +20,8 @@ let router = new Router({
         header: {
           left: 'backward',
           title: '注册'
-        }
+        },
+        bg: 'grey'
       },
       component: () => import(/* webpackChunkName: "register" */ '@page/register')
     }

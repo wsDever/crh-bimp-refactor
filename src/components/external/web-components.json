@@ -74,6 +74,67 @@
       ]
     },
     {
+      "label": "nb-button-async",
+      "description": "带异步处理的按钮",
+      "attributes": [
+        {
+          "label": "bg",
+          "description": "背景",
+          "required": false
+        },
+        {
+          "label": "color",
+          "description": "字体色",
+          "required": false
+        },
+        {
+          "label": "countdown",
+          "description": "如果按钮有倒计时功能该属性设置起始数字",
+          "required": false
+        },
+        {
+          "label": "countdown-container",
+          "description": "倒计时显示占位符（在 slot 对应的选择器内容会被加入倒计秒数）",
+          "required": false
+        },
+        {
+          "label": "countdown-unit",
+          "description": "倒计时后面追加的单位",
+          "required": false
+        },
+        {
+          "label": "disable",
+          "description": "是否处于disable状态",
+          "required": false
+        },
+        {
+          "label": "height",
+          "description": "高度",
+          "required": false
+        },
+        {
+          "label": "loading",
+          "description": "是否处于loading状态",
+          "required": false
+        },
+        {
+          "label": "no-border",
+          "description": "没有外边框",
+          "required": false
+        },
+        {
+          "label": "radius",
+          "description": "圆角",
+          "required": false
+        },
+        {
+          "label": "width",
+          "description": "宽度",
+          "required": false
+        }
+      ]
+    },
+    {
       "label": "nb-header-nav",
       "description": "头部h5导航组件",
       "attributes": [
@@ -240,6 +301,47 @@
       ]
     },
     {
+      "label": "nb-datetime-picker",
+      "description": "时间选择器\n核心代码封装自：https://github.com/fengyuanchen/pickerjs",
+      "attributes": [
+        {
+          "label": "date",
+          "description": "当前选中时间\nnew Date(2048, 9, 24, 5, 12) or '2048-10-24 05:12'",
+          "required": false
+        },
+        {
+          "label": "for",
+          "description": "触发选择显示开关的对象，一般是 input 框，可以是选择器字符串",
+          "required": false
+        },
+        {
+          "label": "format",
+          "description": "日期时间格式设置\nYYYY: 4 digits year with leading zero\nYYY: 3 digits year with leading zero\nYY: 2 digits year with leading zero and be converted to a year near 2000\nY: Years with any number of digits and sign\nMMMM: Month name\nMMM: Short month name\nMM: Month number with leading zero\nM: Month number\nDD: Day of month with leading zero\nD: Day of month\nHH: Hours with leading zero\nH: Hours\nmm: Minutes with leading zero\nm: Minutes\nss: Seconds with leading zero\ns: Seconds\nSSS: Milliseconds with leading zero\nSS: Milliseconds with leading zero\nS: Milliseconds",
+          "required": false
+        },
+        {
+          "label": "rows",
+          "description": "每个选项上是否显示提示性文字\n选项可见行数",
+          "required": false
+        },
+        {
+          "label": "text-cancel",
+          "description": "取消按钮文案",
+          "required": false
+        },
+        {
+          "label": "text-confirm",
+          "description": "确定按钮文案",
+          "required": false
+        },
+        {
+          "label": "text-title",
+          "description": "标题内容",
+          "required": false
+        }
+      ]
+    },
+    {
       "label": "nb-search-bar",
       "description": "搜索框",
       "attributes": [
@@ -266,6 +368,22 @@
         {
           "label": "value",
           "description": "输入框内的值（可变化反射）",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "nb-string-limit",
+      "description": "限制显示文字长度\nlength 模式：固定长度，超出的使用...\nline 模式：固定最大行数",
+      "attributes": [
+        {
+          "label": "mode",
+          "description": "选择限制长度的模式",
+          "required": false
+        },
+        {
+          "label": "number",
+          "description": "针对模式设置数值 line 代表行数， length 代表长度",
           "required": false
         }
       ]
@@ -302,6 +420,53 @@
       ]
     },
     {
+      "label": "nb-tab-slide",
+      "description": "滑动效果的 tab 切换",
+      "attributes": [
+        {
+          "label": "height",
+          "description": "tab 高度",
+          "required": false
+        },
+        {
+          "label": "index",
+          "description": "当前选中的 index",
+          "required": false
+        },
+        {
+          "label": "position",
+          "description": "滑动块的位置，默认：底部",
+          "required": false
+        },
+        {
+          "label": "width",
+          "description": "tab 的宽度",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "nb-limit-textarea",
+      "description": "限制输入内容长度的文本框",
+      "attributes": [
+        {
+          "label": "height",
+          "description": "输入框高度",
+          "required": false
+        },
+        {
+          "label": "limit",
+          "description": "最大长度",
+          "required": false
+        },
+        {
+          "label": "placeholder",
+          "description": "placeholder 提示信息",
+          "required": false
+        }
+      ]
+    },
+    {
       "label": "nb-toast",
       "description": "轻提示",
       "attributes": [
@@ -328,6 +493,37 @@
         {
           "label": "visible",
           "description": "可见开关",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "nb-upload-simple-image",
+      "description": "简单的 H5实现图片选择上传，可设置最大上传几张",
+      "attributes": [
+        {
+          "label": "image-size",
+          "description": "图片最大尺寸单位（KB）",
+          "required": false
+        },
+        {
+          "label": "max-length",
+          "description": "最多能上传几张",
+          "required": false
+        },
+        {
+          "label": "preview-size",
+          "description": "预览图的尺寸",
+          "required": false
+        },
+        {
+          "label": "rate",
+          "description": "将原图缩放至750宽度*多少倍",
+          "required": false
+        },
+        {
+          "label": "upload-text",
+          "description": "提示上传按钮的文案",
           "required": false
         }
       ]

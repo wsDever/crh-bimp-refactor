@@ -1,5 +1,7 @@
 <template>
-  <div id="app">
+  <div id="app" :class="{
+    [$route.meta.bg||'']: true
+  }">
     <!-- 全局头部，通过路由 meta 来控制内容跟显示 -->
     <nb-header-nav
       v-if="$route.meta.header"
