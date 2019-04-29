@@ -5,10 +5,12 @@
     <p>用手机号或员工号登录江海经济圈</p>
     <form action="">
       <input
+        ref="account"
         type="text"
         placeholder="请输入手机号码/员工号"
       >
       <input
+        ref="password"
         type="password"
         placeholder="请输入密码"
       >
@@ -31,25 +33,34 @@
 
 <style lang="scss" src="./login" scoped></style>
 
-
 <script>
   import Vue from "vue";
   import Component from "vue-class-component";
   import Auth from "@model/auth";
+  import Utils from "@lib/utils";
   @Component({})
   export default class Login extends Vue {
-
-    onLogin({ detail }) {
-      setTimeout(() => {
+    // 登录操作
+    async onLogin({ detail }) {
+      const account_content = this.$refs.account.value;
+      const password = this.$refs.password.value;
+      if (account_content.length === 0 || password.length === 0) {
         detail.done();
-      }, 1000);
+        return Utils.nb.toast("账号密码必填");
+      }
+      try {
+        await Auth.login({
+          account_content,
+          password
+        });
+        Utils.nb.toast("登录成功");
+        this.$router.push({ name: "home" });
+      } catch (e) {
+      } finally {
+        detail.done();
+      }
     }
 
-    mounted() {
-      Auth.login({
-        account_content: "81500013",
-        password: "123qwe"
-      });
-    }
+    mounted() {}
   }
 </script>

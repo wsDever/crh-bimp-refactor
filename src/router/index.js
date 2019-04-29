@@ -12,10 +12,10 @@ let router = new Router({
       path: '/login',
       component: () => import(/* webpackChunkName: "login" */ '@page/login')
     },
-    // 注册
+    // 账号注册 ?type=find -> 忘记密码
     {
       name: 'register',
-      path: '/register',
+      path: '/account/register',
       meta: {
         header: {
           left: 'backward',
@@ -24,13 +24,31 @@ let router = new Router({
         bg: 'grey'
       },
       component: () => import(/* webpackChunkName: "register" */ '@page/register')
+    },
+    // 注册设置密码 ?type=find -> 确认新密码
+    {
+      name: 'register.password',
+      path: '/account/set-password',
+      meta: {
+        header: {
+          left: 'backward',
+          title: '设置密码'
+        },
+        bg: 'grey'
+      },
+      component: () => import(/* webpackChunkName: "register.password" */ '@page/register/password')
     }
   ]
 });
 
 router.beforeEach(function(to, from, next) {
   if (from.name) {
+    // 保持滚动位置
     scrollBehavior.apply(router, [to, from]);
+  }
+  // 注册找回密码逻辑复用
+  if (to.name === 'register' && to.query.type === 'find') {
+    to.meta.header.title = '忘记密码';
   }
   next();
 });

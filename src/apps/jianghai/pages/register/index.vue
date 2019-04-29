@@ -1,14 +1,13 @@
 <template>
-  <!-- 注册 -->
+  <!-- 注册 | 忘记密码 -->
   <div class="register">
     <nb-list top-space="30">
-      <nb-list-item
-        height="88"
-        short="left"
-      >
+      <nb-list-item height="88">
         <input
-          type="text"
+          type="tel"
           placeholder="请输入手机号"
+          maxlength="11"
+          ref="mobile"
         >
       </nb-list-item>
       <nb-list-item height="88">
@@ -42,17 +41,21 @@
     <p class="help">
       若收不到验证码请联系客服：<a href="tel://400-6662288">400-6662288</a>
     </p>
-    <center>
+    <div class="btn-space">
       <nb-button-async
         :width="690"
         :height="88"
+        @tap="onNext"
       >
         <div class="btn">
           下一步
         </div>
       </nb-button-async>
-    </center>
-    <p class="link">
+    </div>
+    <p
+      v-show="$route.query.type !== 'find'"
+      class="link"
+    >
       <router-link :to="{ name: 'login' }">
         已有账号，请登录
       </router-link>
@@ -68,9 +71,26 @@
   import Auth from "@model/auth";
   @Component({})
   export default class Register extends Vue {
+    // 倒计时中
     countdowning = false;
 
-    onCountdown({ detail }) {
+    // 下一步
+    onNext({ detail }) {
+      this.$router.push({ name: "register.password", query: this.$route.query });
+    }
+
+    // 处理倒计时开关
+    async onCountdown({ detail }) {
+      const mobile_tel = this.$refs.mobile.value;
+      if (detail.status === "start") {
+        // 发验证码请求
+        const result = await Auth.sendVerifyCode({
+          mobile_tel
+        });
+        if (!result) {
+          return this.$refs.verifyBtn.done();
+        }
+      }
       this.countdowning = detail.status === "start";
     }
 

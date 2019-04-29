@@ -3,6 +3,7 @@
  */
 import nb from './nb';
 import url from './url';
+import rules from './rules';
 
 export default {
 
@@ -10,5 +11,8 @@ export default {
   nb,
 
   // 链接地址相关
-  url
+  url,
+
+  // 数据校验正则
+  rules
 };

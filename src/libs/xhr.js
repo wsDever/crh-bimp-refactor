@@ -16,11 +16,14 @@ const XHR = Axios.create({
 
 // 全局请求信息配置
 XHR.interceptors.request.use(
-  config => {
+  async config => {
     if (config.method === 'post') {
       config.data = Utils.url.serialize(config.data);
     }
-    console.log(config);
+    // url 增加前缀
+    const { api } = await Config.client();
+    config.url = api + config.url;
+    // console.log(config);
     config.headers = {
       token: sessionStorage.getItem(Config.tokenSessName) || '',
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
