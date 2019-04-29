@@ -11,6 +11,18 @@ let router = new Router({
       name: 'login',
       path: '/login',
       component: () => import(/* webpackChunkName: "login" */ '@page/login')
+    },
+    // 注册
+    {
+      name: 'register',
+      path: '/register',
+      meta: {
+        header: {
+          left: 'backward',
+          title: '注册'
+        }
+      },
+      component: () => import(/* webpackChunkName: "register" */ '@page/register')
     }
   ]
 });
