@@ -23,7 +23,8 @@ let router = new Router({
         },
         bg: 'grey'
       },
-      component: () => import(/* webpackChunkName: "register" */ '@page/register')
+      component: () =>
+        import(/* webpackChunkName: "register" */ '@page/register')
     },
     // 注册设置密码 ?type=find -> 确认新密码
     {
@@ -36,7 +37,8 @@ let router = new Router({
         },
         bg: 'grey'
       },
-      component: () => import(/* webpackChunkName: "set-password" */ '@page/register/password')
+      component: () =>
+        import(/* webpackChunkName: "set-password" */ '@page/register/password')
     }
   ]
 });
@@ -47,18 +49,21 @@ router.beforeEach(function(to, from, next) {
     scrollBehavior.apply(router, [to, from]);
   }
   // 注册找回密码逻辑复用
-  if (to.name === 'register' && to.query.type === 'find') {
-    to.meta.header.title = '忘记密码';
+  if (to.name === 'register') {
+    to.meta.header.title = {
+      '': '注册',
+      find: '忘记密码'
+    }[to.query.type || ''];
   }
   next();
 });
 
 (async () => {
   // 插入客户特殊路由
-  const clientRoutes = await import(/* webpackChunkName: "client-route" */ `./${__CLIENT__}`);
-  router.addRoutes([
-    ...clientRoutes.default
-  ]);
+  const clientRoutes = await import(
+    /* webpackChunkName: "client-route" */ `./${__CLIENT__}`
+  );
+  router.addRoutes([...clientRoutes.default]);
 })();
 
 export default router;

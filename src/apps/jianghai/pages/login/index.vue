@@ -25,7 +25,7 @@
       </nb-button-async>
       <div class="links">
         <router-link :to="{ name: 'register' }">注册</router-link>
-        <a href="#">忘记密码</a>
+        <router-link :to="{ name: 'register', query: { type: 'find' } }">忘记密码</router-link>
       </div>
     </form>
   </div>
