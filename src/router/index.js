@@ -36,7 +36,7 @@ let router = new Router({
         },
         bg: 'grey'
       },
-      component: () => import(/* webpackChunkName: "register.password" */ '@page/register/password')
+      component: () => import(/* webpackChunkName: "set-password" */ '@page/register/password')
     }
   ]
 });

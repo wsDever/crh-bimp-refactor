@@ -47,7 +47,8 @@ XHR.interceptors.response.use(
     if (data.error_no != 0) {
       APIObserver.emit('response.error', {
         code: data.error_no,
-        msg: data.error_info
+        msg: data.error_info,
+        hash: location.hash
       });
       throw new Error(data.error_info);
     }

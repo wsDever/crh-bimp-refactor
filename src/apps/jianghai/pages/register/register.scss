@@ -21,11 +21,11 @@
       text-align: right;
     }
   }
-  
+
   .help {
     margin: 20px 30px 40px;
     font-size: 26px;
-    
+
     .tel {
       color: $brand-primary-color;
     }
@@ -40,7 +40,7 @@
     text-align: center;
     margin-top: 40px;
   }
-  
+
   .btn-space {
     text-align: center;
     &.password {
@@ -48,4 +48,13 @@
     }
   }
 
+  &.agreement {
+    padding-bottom: 40px;
+    .item {
+      margin: 20px;
+      img {
+        max-width: 100%;
+      }
+    }
+  }
 }

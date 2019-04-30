@@ -87,7 +87,7 @@ export declare class ButtonAsync {
     /**
      * 处理点击
      */
-    private onClick;
+    onClick(): Promise<boolean>;
     componentDidLoad(): void;
     render(): JSX.Element;
 }

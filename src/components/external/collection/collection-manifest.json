@@ -210,6 +210,9 @@
       "methods": [
         {
           "name": "done"
+        },
+        {
+          "name": "onClick"
         }
       ],
       "hostElement": {

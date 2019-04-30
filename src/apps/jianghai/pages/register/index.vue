@@ -13,11 +13,13 @@
       <nb-list-item height="88">
         <input
           type="text"
+          ref="code"
+          maxlength="4"
           placeholder="请输入验证码"
         >
         <div class="verify">
           <nb-button-async
-            :countdown="20"
+            :countdown="60"
             width="200"
             bg="#ffffff"
             color="#3E86F7"
@@ -69,29 +71,73 @@
   import Vue from "vue";
   import Component from "vue-class-component";
   import Auth from "@model/auth";
+  import Utils from "@lib/utils";
   @Component({})
   export default class Register extends Vue {
     // 倒计时中
     countdowning = false;
 
+    // 是否已经发送过验证码
+    isVerifyCodeSended = false;
+
     // 下一步
-    onNext({ detail }) {
-      this.$router.push({ name: "register.password", query: this.$route.query });
+    async onNext({ detail }) {
+      const mobile_tel = this.$refs.mobile.value;
+      const cmd = this.$route.query.type || 'register';
+      const isExist = await Auth.isMobileExist({ mobile_tel });
+      // 先检查手机号是否已经注册过
+      if (cmd === 'register') {
+        if (isExist == 1) {
+          detail.done();
+          return Utils.nb.modal("alert", {
+            title: '提示',
+            content: "此号码已被使用",
+          });
+        }
+        if (isExist === false) {
+          return detail.done();
+        }
+      }
+      // 判断是否点击过验证获取
+      if (!this.isVerifyCodeSended) {
+        detail.done();
+        return Utils.nb.modal("alert", {
+          title: '提示',
+          content: "请先获取验证码",
+        });
+      }
+      // 先校验验证码
+      try {
+        const success = await Auth.checkVerifyCode({
+          mobile_tel,
+          sms_code: this.$refs.code.value
+        });
+        if (success) {
+          cmd === 'register' && this.$router.push({
+            name: "register.agreement",
+            query: this.$route.query
+          });
+        }
+      } finally {
+        detail.done();
+      }
     }
 
     // 处理倒计时开关
     async onCountdown({ detail }) {
-      const mobile_tel = this.$refs.mobile.value;
-      if (detail.status === "start") {
+      this.countdowning = detail.status === "start";
+      if (this.countdowning) {
         // 发验证码请求
-        const result = await Auth.sendVerifyCode({
-          mobile_tel
+        const success = await Auth.sendVerifyCode({
+          mobile_tel: this.$refs.mobile.value
         });
-        if (!result) {
-          return this.$refs.verifyBtn.done();
+        if (!success) {
+          // 发送失败重置按钮
+          this.$refs.verifyBtn.done();
+        } else {
+          this.isVerifyCodeSended = true;
         }
       }
-      this.countdowning = detail.status === "start";
     }
 
     mounted() {}

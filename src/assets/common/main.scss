@@ -56,6 +56,7 @@ nb-header-nav {
 #app {
   height: 100vh;
   overflow: scroll;
+  -webkit-overflow-scrolling: touch;
 
   &.grey {
     background: $layout-bg-color;

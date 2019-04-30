@@ -56,8 +56,11 @@
 
     beforeMount() {
       // 针对特殊的错误 code 做 vue层面的响应
-      this.$App.APIObserver.on("response.error", ({ code }) => {
-        // TODO: 登录超时重登
+      this.$App.APIObserver.on("response.error", ({ code, hash }) => {
+        // 登录超时重登
+        if (code === '-2222') {
+          this.$router.replace({ name: 'login', query: { from: hash } });
+        }
       });
     }
   }

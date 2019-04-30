@@ -57,8 +57,9 @@ export class ButtonAsync {
             clearTimeout(this.countdownTimer);
             this.done();
         }
+        return true;
     }
-    onClick() {
+    async onClick() {
         this.loading = true;
         if (this.countdown > 0) {
             this.countdownDisplay = this.countdown;
@@ -70,6 +71,7 @@ export class ButtonAsync {
         this.tap.emit({
             done: this.done.bind(this)
         });
+        return true;
     }
     componentDidLoad() {
         if (this.countdownDisplay > 0 && this.countdown > 0) {
@@ -132,6 +134,9 @@ export class ButtonAsync {
         "noBorder": {
             "type": Boolean,
             "attr": "no-border"
+        },
+        "onClick": {
+            "method": true
         },
         "radius": {
             "type": Number,

@@ -70,7 +70,10 @@ let config = {
       },
       {
         test: /\.vue$/,
-        loader: 'vue-loader'
+        loader: 'vue-loader',
+        options: {
+          hotReload: true
+        }
       },
       {
         test: /\.(scss|sass|css)$/,
