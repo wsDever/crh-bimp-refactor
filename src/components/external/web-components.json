@@ -98,8 +98,23 @@
           "required": false
         },
         {
-          "label": "countdown-unit",
-          "description": "倒计时后面追加的单位",
+          "label": "countdown-html",
+          "description": "倒计时显示内容",
+          "required": false
+        },
+        {
+          "label": "countdown-id",
+          "description": "如果是有多个倒计时的需要设置唯一id",
+          "required": false
+        },
+        {
+          "label": "countdown-origin",
+          "description": "倒计时完毕后恢复内容",
+          "required": false
+        },
+        {
+          "label": "countdown-replace",
+          "description": "替换 ？？变为倒计时",
           "required": false
         },
         {

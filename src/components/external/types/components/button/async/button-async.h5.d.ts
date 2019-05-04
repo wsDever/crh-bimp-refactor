@@ -38,17 +38,29 @@ export declare class ButtonAsync {
      */
     noBorder: boolean;
     /**
+     * 如果是有多个倒计时的需要设置唯一id
+     */
+    countdownId: string;
+    /**
      * 如果按钮有倒计时功能该属性设置起始数字
      */
     countdown: number;
     /**
-     * 倒计时后面追加的单位
-     */
-    countdownUnit: string;
-    /**
      * 倒计时显示占位符（在 slot 对应的选择器内容会被加入倒计秒数）
      */
     countdownContainer: string;
+    /**
+     * 倒计时完毕后恢复内容
+     */
+    countdownOrigin: string;
+    /**
+     * 替换 ？？变为倒计时
+     */
+    countdownReplace: string;
+    /**
+     * 倒计时显示内容
+     */
+    countdownHtml: string;
     /**
      * 点击对应的处理已经完成
      */
@@ -87,7 +99,9 @@ export declare class ButtonAsync {
     /**
      * 处理点击
      */
-    onClick(): Promise<boolean>;
+    handleClick(): Promise<boolean>;
+    componentWillLoad(): void;
     componentDidLoad(): void;
+    componentDidUnload(): void;
     render(): JSX.Element;
 }

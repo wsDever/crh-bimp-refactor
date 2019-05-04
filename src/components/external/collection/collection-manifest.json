@@ -165,9 +165,24 @@
           "attr": "countdown-container"
         },
         {
-          "name": "countdownUnit",
+          "name": "countdownHtml",
           "type": "String",
-          "attr": "countdown-unit"
+          "attr": "countdown-html"
+        },
+        {
+          "name": "countdownId",
+          "type": "String",
+          "attr": "countdown-id"
+        },
+        {
+          "name": "countdownOrigin",
+          "type": "String",
+          "attr": "countdown-origin"
+        },
+        {
+          "name": "countdownReplace",
+          "type": "String",
+          "attr": "countdown-replace"
         },
         {
           "name": "disable",
@@ -212,7 +227,7 @@
           "name": "done"
         },
         {
-          "name": "onClick"
+          "name": "handleClick"
         }
       ],
       "hostElement": {

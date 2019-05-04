@@ -8,8 +8,9 @@
       <nb-button-async
         :width="690"
         :height="88"
+        countdown-id="agreement"
         countdown="10"
-        countdown-unit="秒"
+        countdown-html="(%n)秒"
         @tap="onAgree"
         @count="onCountdown"
         ref="agreeBtn"
@@ -53,7 +54,7 @@
     // 获取协议列表 base64
     async fetchAgreementList() {
       this.agreementList = await Auth.agreement();
-      this.$refs.agreeBtn.onClick();
+      this.$refs.agreeBtn.handleClick();
     }
 
     mounted() {

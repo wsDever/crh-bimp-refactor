@@ -9,24 +9,31 @@ class ButtonAsync {
         this.color = '#ffffff';
         this.radius = 8;
         this.noBorder = false;
+        this.countdownId = '';
         this.countdown = 0;
-        this.countdownUnit = 's';
         this.countdownContainer = '.countdown';
+        this.countdownOrigin = '.origin';
+        this.countdownReplace = '%n';
+        this.countdownHtml = '倒计时%n秒';
         this.loading = false;
         this.disable = false;
-        this.countdownDisplay = Number(sessionStorage.getItem(COUNTDOWN_SESSION) || 0);
+        this.countdownDisplay = 0;
     }
     async done() {
         const countdownEl = this.el.querySelector(this.countdownContainer);
+        const originEl = this.el.querySelector(this.countdownOrigin);
         this.disable = false;
         this.loading = false;
         this.countdownDisplay = 0;
-        sessionStorage.removeItem(COUNTDOWN_SESSION);
+        sessionStorage.removeItem(COUNTDOWN_SESSION + this.countdownId);
         this.count.emit({
             status: 'finish'
         });
         if (countdownEl) {
             countdownEl.innerHTML = '';
+        }
+        if (originEl) {
+            originEl.style.display = 'block';
         }
         return true;
     }
@@ -47,10 +54,14 @@ class ButtonAsync {
     handleCountdown() {
         this.disable = true;
         const countdownEl = this.el.querySelector(this.countdownContainer);
+        const originEl = this.el.querySelector(this.countdownOrigin);
         if (countdownEl) {
-            countdownEl.innerHTML = String(this.countdownDisplay) + this.countdownUnit;
+            countdownEl.innerHTML = this.countdownHtml.replace(this.countdownReplace, String(this.countdownDisplay));
         }
-        sessionStorage.setItem(COUNTDOWN_SESSION, String(this.countdownDisplay));
+        if (originEl) {
+            originEl.style.display = 'none';
+        }
+        sessionStorage.setItem(COUNTDOWN_SESSION + this.countdownId, String(this.countdownDisplay));
         if (this.countdownDisplay > 0) {
             this.countdownDisplay--;
             this.countdownTimer = setTimeout(this.handleCountdown.bind(this), 1000);
@@ -61,30 +72,36 @@ class ButtonAsync {
         }
         return true;
     }
-    async onClick() {
+    async handleClick() {
         this.loading = true;
         if (this.countdown > 0) {
-            this.countdownDisplay = this.countdown;
-            this.count.emit({
-                status: 'start'
-            });
-            this.handleCountdown();
+            if (this.countdownDisplay == 0) {
+                this.countdownDisplay = this.countdown;
+                this.count.emit({
+                    status: 'start'
+                });
+            }
+            if (!this.countdownTimer)
+                this.handleCountdown();
         }
         this.tap.emit({
             done: this.done.bind(this)
         });
         return true;
     }
+    componentWillLoad() {
+        this.countdownDisplay = Number(sessionStorage.getItem(COUNTDOWN_SESSION + this.countdownId) || 0);
+    }
     componentDidLoad() {
         if (this.countdownDisplay > 0 && this.countdown > 0) {
-            this.count.emit({
-                status: 'start'
-            });
             this.handleCountdown();
         }
     }
+    componentDidUnload() {
+        clearTimeout(this.countdownTimer);
+    }
     render() {
-        return (h("button", { onClick: this.onClick.bind(this), disabled: this.disable || this.loading, class: `btn ${this.loading ? 'loading' : ''}`, style: Object.assign({}, this.btnStyles) },
+        return (h("button", { onClick: this.handleClick.bind(this), disabled: this.disable || this.loading, class: `btn ${this.loading ? 'loading' : ''}`, style: Object.assign({}, this.btnStyles) },
             h("slot", null)));
     }
     static get is() { return "nb-button-async"; }
@@ -109,9 +126,21 @@ class ButtonAsync {
         "countdownDisplay": {
             "state": true
         },
-        "countdownUnit": {
+        "countdownHtml": {
             "type": String,
-            "attr": "countdown-unit"
+            "attr": "countdown-html"
+        },
+        "countdownId": {
+            "type": String,
+            "attr": "countdown-id"
+        },
+        "countdownOrigin": {
+            "type": String,
+            "attr": "countdown-origin"
+        },
+        "countdownReplace": {
+            "type": String,
+            "attr": "countdown-replace"
         },
         "disable": {
             "type": Boolean,
@@ -123,6 +152,9 @@ class ButtonAsync {
         },
         "el": {
             "elementRef": true
+        },
+        "handleClick": {
+            "method": true
         },
         "height": {
             "type": Number,
@@ -136,9 +168,6 @@ class ButtonAsync {
         "noBorder": {
             "type": Boolean,
             "attr": "no-border"
-        },
-        "onClick": {
-            "method": true
         },
         "radius": {
             "type": Number,
@@ -162,7 +191,7 @@ class ButtonAsync {
             "cancelable": true,
             "composed": true
         }]; }
-    static get style() { return ".btn{border:none;outline:none}.btn.loading,.btn[disabled]{opacity:.5}"; }
+    static get style() { return ".btn.sc-nb-button-async{border:none;outline:none}.btn.loading.sc-nb-button-async, .btn[disabled].sc-nb-button-async{opacity:.5}"; }
 }
 
 export { ButtonAsync as NbButtonAsync };

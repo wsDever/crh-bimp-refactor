@@ -19,7 +19,9 @@
         >
         <div class="verify">
           <nb-button-async
+            countdown-id="verifycode"
             :countdown="60"
+            countdown-html="%ns重新获取"
             width="200"
             bg="#ffffff"
             color="#3E86F7"
@@ -28,13 +30,10 @@
             ref="verifyBtn"
           >
             <div class="btn">
-              <span v-show="countdowning">
-                <span class="countdown"></span>
-                重新获取
-              </span>
-              <span v-show="!countdowning">
+              <span class="origin">
                 获取验证码
               </span>
+              <span class="countdown"></span>
             </div>
           </nb-button-async>
         </div>
@@ -74,8 +73,6 @@
   import Utils from "@lib/utils";
   @Component({})
   export default class Register extends Vue {
-    // 倒计时中
-    countdowning = false;
 
     // 是否已经发送过验证码
     isVerifyCodeSended = false;
@@ -125,8 +122,7 @@
 
     // 处理倒计时开关
     async onCountdown({ detail }) {
-      this.countdowning = detail.status === "start";
-      if (this.countdowning) {
+      if (detail.status === "start") {
         // 发验证码请求
         const success = await Auth.sendVerifyCode({
           mobile_tel: this.$refs.mobile.value
