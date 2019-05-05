@@ -48,9 +48,8 @@ class AuthModel extends Auth {
    * 签署协议入参获取
    */
   async signAgreementParams() {
-    const { agreement_busin_type } = await Config.client();
     const { data } = await XHR.post('/snp/CRH-SNP3058', {
-      busin_type: agreement_busin_type
+      busin_type: Config.agreementBusinType
     });
     this._signAgreementCollection = data.data;
   }
@@ -106,7 +105,7 @@ class AuthModel extends Auth {
   @action
   async brokerRegister(params) {
     if (!Utils.rules.shareCode(params.share_code)) {
-      Utils.nb.toast('邀请码格式错误');
+      Utils.nb.toast(Config.text.shareCodeError);
       return false;
     }
     try {
@@ -127,7 +126,7 @@ class AuthModel extends Auth {
   @action
   async checkVerifyCode(params) {
     if (params.sms_code.length === 0) {
-      Utils.nb.toast('请输入验证码');
+      Utils.nb.toast(Config.text.verifyCodeReq);
       return false;
     }
     if (!(await this.validMobile(params.mobile_tel))) return false;

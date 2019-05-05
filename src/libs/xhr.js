@@ -21,8 +21,7 @@ XHR.interceptors.request.use(
       config.data = Utils.url.serialize(config.data);
     }
     // url 增加前缀
-    const { api } = await Config.client();
-    config.url = api + config.url;
+    config.url = Config.api + config.url;
     // console.log(config);
     config.headers = {
       token: sessionStorage.getItem(Config.tokenSessName) || '',

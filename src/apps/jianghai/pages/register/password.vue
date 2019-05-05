@@ -86,8 +86,8 @@
         const regSuccess = await Auth.brokerRegister({
           share_code: this.$refs.shareCode.value
         });
-        if (!setPassSuccess)
-        return detail.done();
+        if (!setPassSuccess) return detail.done();
+        // TODO: 注册成功提示
       }
     }
 

@@ -8,11 +8,36 @@ export default {
   // 版本号
   version: '3.0',
   // 500001：经纪人注册业务 | 500002:经纪人签约风险揭示 | 500003:经纪人签约合同
-  agreement_busin_type: '500001',
+  agreementBusinType: '500001',
+  // 脚底导航
+  footerNavItems: [
+    {
+      key: "home",
+      icon: "iconshouyex",
+      iconAx: "iconshouyeAx",
+      text: "首页"
+    },
+    {
+      key: "client",
+      icon: "iconkehux",
+      iconAx: "iconkehuAx",
+      text: "客户"
+    },
+    {
+      key: "achievement",
+      icon: "iconyejix",
+      iconAx: "iconyejiAx",
+      text: "业绩"
+    },
+    {
+      key: "my",
+      icon: "iconwodex",
+      iconAx: "iconwodex",
+      text: "我的"
+    }
+  ],
   // 显示文案
-  text: {
-    mobile_error: '请输入有效手机号'
-  },
+  text: {},
   // 接口地址
   api: {
     development: 'http://jhbackendtest.xpe.com:12271',

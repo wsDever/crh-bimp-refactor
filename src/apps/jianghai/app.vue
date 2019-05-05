@@ -62,12 +62,12 @@
       "$route.meta.header": {
         handler(header) {
           this.$nextTick(() => {
-            if (!header.styles) return;
-            this.$refs.header.styles = header.styles;
+            if (!header) return;
+            this.$refs.header.styles = header.styles || {};
             // 为主内容添加 padding
-            if (header.styles.height) {
-              this.$refs.main.style.paddingTop = `${Number(header.styles.height) / 75}rem`;
-            }
+            this.$refs.main.style.paddingTop = `${Number(
+              this.$refs.header.styles.height || 88
+            ) / 75}rem`;
           });
         }
       },
@@ -76,7 +76,9 @@
           this.$nextTick(() => {
             if (!footer) return;
             // 添加 padding-bottom
-            this.$refs.main.style.paddingBottom = `${this.$refs.footer.$el.clientHeight}px`;
+            this.$refs.main.style.paddingBottom = `${
+              this.$refs.footer.$el.clientHeight
+            }px`;
           });
         }
       }
@@ -84,32 +86,7 @@
   })
   export default class App extends Vue {
     // 脚底导航的数据
-    footerNavItems = [
-      {
-        key: "home",
-        icon: "iconshouyex",
-        iconAx: "iconshouyeAx",
-        text: "首页"
-      },
-      {
-        key: "client",
-        icon: "iconkehux",
-        iconAx: "iconkehuAx",
-        text: "客户"
-      },
-      {
-        key: "achievement",
-        icon: "iconyejix",
-        iconAx: "iconyejiAx",
-        text: "业绩"
-      },
-      {
-        key: "my",
-        icon: "iconwodex",
-        iconAx: "iconwodex",
-        text: "我的"
-      }
-    ];
+    footerNavItems = [];
 
     /**
      * 头部导航点击处理
@@ -124,7 +101,10 @@
       }
     }
 
-    beforeMount() {
+    async beforeMount() {
+      // 设置脚底导航信息
+      this.footerNavItems = this.$App.Config.footerNavItems;
+
       // 针对特殊的错误 code 做 vue层面的响应
       this.$App.APIObserver.on("response.error", ({ code, hash }) => {
         // 登录超时重登

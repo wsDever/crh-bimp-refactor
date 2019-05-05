@@ -18,7 +18,7 @@ class AuthModel {
    */
   async validMobile(mobile_tel) {
     if (!Utils.rules.mobile(mobile_tel)) {
-      Utils.nb.toast('请输入有效的手机号');
+      Utils.nb.toast(Config.text.mobileError);
       return false;
     }
     return true;
@@ -78,7 +78,7 @@ class AuthModel {
   async setPassword(params) {
     // 校验密码规范
     if (!Utils.rules.password(params.password)) {
-      Utils.nb.toast('密码为6-16位数字或字母');
+      Utils.nb.toast(Config.text.passwordError);
       return false;
     }
     try {
@@ -102,7 +102,7 @@ class AuthModel {
     await XHR.post('/snp/CRH-SNP2004', {
       ...params
     });
-    Utils.nb.toast('验证已发送，请注意查看');
+    Utils.nb.toast('验证已发送');
     return true;
   }
 }
