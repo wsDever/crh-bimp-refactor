@@ -1,11 +1,12 @@
 <template>
   <div>
     <nb-list>
-      <nb-list-item
-        @click="$router.push({ name: 'shop' })"
-        v-for="(item, i) in '123456789'.split('')"
-        :key="i"
-      >homepage-{{item}}</nb-list-item>
+      <nb-list-item>
+        <router-link :to="{ name: 'login' }">登录页</router-link>
+      </nb-list-item>
+      <nb-list-item>
+        <router-link :to="{ name: 'shop' }">微店页</router-link>
+      </nb-list-item>
     </nb-list>
   </div>
 </template>
