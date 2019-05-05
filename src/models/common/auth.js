@@ -12,7 +12,6 @@ import Utils from '@lib/utils';
  */
 
 class AuthModel {
-
   /**
    * 校验手机号码格式
    * @param {String} mobile_tel
@@ -28,12 +27,23 @@ class AuthModel {
   /**
    * 保存登录后用户的一些必要的信息全局可用
    */
-  userLoginRes = observable.map({});
+  userLoginRes = observable.map(
+    JSON.parse(sessionStorage.getItem(Config.userInfoSessName) || '{}')
+  );
 
   /**
    * 保存注册流程中保存的用户信息
    */
   userRegRes = observable.map({});
+
+  /**
+   * 记住账号，设置账号信息则为设置记住账号
+   */
+  rememberAccount(account_content) {
+    if (!account_content)
+      return localStorage.getItem(Config.accountLocalName) || '';
+    localStorage.setItem(Config.accountLocalName, account_content);
+  }
 
   /**
    * 用户登录
@@ -44,25 +54,9 @@ class AuthModel {
       image_code	String	图形验证码
    */
   async login(params) {
-    const { data } = await XHR.post('/snp/CRH-SNP2001', {
-      // 默认不用验证码
-      image_code_type: 0,
-      ...params
-    });
-    runInAction(() => {
-      // 存入登录成功后的用户信息
-      Object.keys(data).map(key => {
-        if (!~['error_no', 'error_info'].indexOf(key)) {
-          this.userLoginRes.set(key, data[key]);
-        }
-        // token 加入 session
-        if (key === 'token') {
-          sessionStorage.setItem(Config.tokenSessName, data.token);
-        }
-      });
-
-      console.log('用户登录成功, 存入数据:', this.userLoginRes.toJSON());
-    });
+    const { data } = await XHR.post('/snp/CRH-SNP2001', params);
+    this.rememberAccount(params.account_content);
+    return data;
   }
 
   /**
@@ -86,14 +80,13 @@ class AuthModel {
     if (!Utils.rules.password(params.password)) {
       Utils.nb.toast('密码为6-16位数字或字母');
       return false;
-    };
+    }
     try {
       await XHR.post('/snp/CRH-SNP2006', {
         ...params
       });
       return true;
-    }
-    catch(e) {
+    } catch (e) {
       return false;
     }
   }

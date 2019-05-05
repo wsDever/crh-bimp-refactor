@@ -20,7 +20,7 @@
         <div class="verify">
           <nb-button-async
             countdown-id="verifycode"
-            :countdown="10"
+            :countdown="60"
             countdown-html="%ns重新获取"
             width="200"
             bg="#ffffff"

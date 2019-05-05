@@ -8,6 +8,7 @@
         ref="account"
         type="text"
         placeholder="请输入手机号码/员工号"
+        :value="Auth.rememberAccount()"
       >
       <input
         ref="password"
@@ -40,6 +41,9 @@
   import Utils from "@lib/utils";
   @Component({})
   export default class Login extends Vue {
+
+    Auth = Auth;
+
     // 登录操作
     async onLogin({ detail }) {
       const account_content = this.$refs.account.value;
@@ -49,7 +53,7 @@
         return Utils.nb.toast("账号密码必填");
       }
       try {
-        await Auth.login({
+        await Auth.loginJianghai({
           account_content,
           password
         });

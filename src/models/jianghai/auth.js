@@ -5,11 +5,44 @@ import Config from '@config';
 import Utils from '@lib/utils';
 
 class AuthModel extends Auth {
-
   /**
    * 寄存入参接口拿到的所有签署业务协议内容
    */
   _signAgreementCollection = [];
+
+  /**
+   * 江海登录流程
+   */
+  async loginJianghai(params) {
+    const password = Utils.encrypt(params.password);
+    const data = await this.login({
+      ...params,
+      password
+    });
+    runInAction(() => {
+      // 原生交互
+      if (Utils.device.ios) {
+        location.href = 'objc://loginSuccess/';
+      } else if (Utils.device.android) {
+        jtoJHandle && jtoJHandle.loginSuccess();
+      }
+
+      // 存入登录成功后的用户信息
+      Object.keys(data).map(key => {
+        if (!~['error_no', 'error_info'].indexOf(key)) {
+          this.userLoginRes.set(key, data[key]);
+        }
+        // 用户信息加入 session
+        sessionStorage.setItem(Config.accountLocalName, JSON.stringify(this.userLoginRes.toJSON()));
+        // token 加入 session
+        if (key === 'token') {
+          sessionStorage.setItem(Config.tokenSessName, data.token);
+        }
+      });
+
+      console.log('用户登录成功, 存入数据:', this.userLoginRes.toJSON());
+    });
+  }
 
   /**
    * 签署协议入参获取
@@ -19,7 +52,7 @@ class AuthModel extends Auth {
     const { data } = await XHR.post('/snp/CRH-SNP3058', {
       busin_type: agreement_busin_type
     });
-    this._signAgreementCollection =  data.data;
+    this._signAgreementCollection = data.data;
   }
 
   /**
@@ -30,7 +63,10 @@ class AuthModel extends Auth {
    */
   async agreement() {
     await this.signAgreementParams();
-    const { agreement_no, agreement_version } = this._signAgreementCollection[1];
+    const {
+      agreement_no,
+      agreement_version
+    } = this._signAgreementCollection[0];
     const { data } = await XHR.post('/snp/CRH-SNP3055', {
       agreement_no,
       agreement_version
@@ -47,23 +83,21 @@ class AuthModel extends Auth {
     digest_info	String[]	 摘要信息
    */
   async signAgreement() {
-    const agreementData = this._signAgreementCollection[1];
+    const agreementData = this._signAgreementCollection[0];
     try {
       await XHR.post('/snp/CRH-SNP3056', {
         econtract_no: agreementData.agreement_no,
         econtract_name: agreementData.agreement_name,
         econtract_md5: agreementData.content_md5,
         sign_value: agreementData.agreement_content_type,
-        digest_info: agreementData.econtract_content,
+        digest_info: agreementData.econtract_content
       });
       return true;
-    }
-    catch(e) {
+    } catch (e) {
       return false;
     }
   }
 
-  
   /**
    * 准经纪人注册，前置（设置密码）
    * share_code	String	邀请人邀请编号
