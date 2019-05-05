@@ -8,7 +8,7 @@
       @click="navTo(item)"
     >
       <i
-        class="zybfont"
+        class="iconfont"
         :class="item.key === activeKey ? item.iconAx : item.icon"
       />
       <span>{{ item.text }}</span>
@@ -85,7 +85,7 @@
     li {
       flex-direction: row;
       height: 98px - 14px;
-      padding-top: 14px;
+      // padding-top: 14px;
       display: block;
       text-align: center;
       color: $font-light-grey;

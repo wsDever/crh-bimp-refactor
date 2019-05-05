@@ -25,7 +25,8 @@ export default [
         styles: {
           height: 96,
         }
-      }
+      },
+      footer: true
     },
     component: () =>
       import(/* webpackChunkName: "home-page" */ '@page/home/home-page')

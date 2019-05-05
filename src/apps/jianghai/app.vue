@@ -29,10 +29,21 @@
         slot="right"
       ></div>
     </nb-header-nav>
+
     <!-- 页面主体内容 -->
-    <router-transition>
-      <router-view></router-view>
-    </router-transition>
+    <main ref="main">
+      <router-transition>
+        <router-view></router-view>
+      </router-transition>
+    </main>
+
+    <!-- 页脚导航 -->
+    <footer-nav
+      ref="footer"
+      v-show="$route.meta.footer"
+      :activeKey="$route.name"
+      :items="footerNavItems"
+    ></footer-nav>
   </div>
 </template>
 
@@ -40,22 +51,66 @@
   import Vue from "vue";
   import Component from "vue-class-component";
   import RouterTransition from "@com/common/router-transition";
+  import FooterNav from "@com/common/footer/nav";
   @Component({
     components: {
-      RouterTransition
+      RouterTransition,
+      FooterNav
     },
     watch: {
       // 因为没办法直接通过 :styles 设置对象数据（react可以？）因此在得到元素通过设置属性的方式实现
       "$route.meta.header": {
         handler(header) {
           this.$nextTick(() => {
-            this.$refs.header.styles = header.styles || {};
+            if (!header.styles) return;
+            this.$refs.header.styles = header.styles;
+            // 为主内容添加 padding
+            if (header.styles.height) {
+              this.$refs.main.style.paddingTop = `${Number(header.styles.height) / 75}rem`;
+            }
+          });
+        }
+      },
+      "$route.meta.footer": {
+        handler(footer) {
+          this.$nextTick(() => {
+            if (!footer) return;
+            // 添加 padding-bottom
+            this.$refs.main.style.paddingBottom = `${this.$refs.footer.$el.clientHeight}px`;
           });
         }
       }
     }
   })
   export default class App extends Vue {
+    // 脚底导航的数据
+    footerNavItems = [
+      {
+        key: "home",
+        icon: "iconshouyex",
+        iconAx: "iconshouyeAx",
+        text: "首页"
+      },
+      {
+        key: "client",
+        icon: "iconkehux",
+        iconAx: "iconkehuAx",
+        text: "客户"
+      },
+      {
+        key: "achievement",
+        icon: "iconyejix",
+        iconAx: "iconyejiAx",
+        text: "业绩"
+      },
+      {
+        key: "my",
+        icon: "iconwodex",
+        iconAx: "iconwodex",
+        text: "我的"
+      }
+    ];
+
     /**
      * 头部导航点击处理
      */
