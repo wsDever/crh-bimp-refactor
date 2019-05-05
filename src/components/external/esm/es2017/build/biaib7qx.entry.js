@@ -10,12 +10,12 @@ class TabSlide {
     }
     get slidePositionStyle() {
         return {
-            [this.position]: '0'
+            [this.position]: '0',
         };
     }
     onIndexChange(newIndex) {
         this.change.emit({
-            index: newIndex
+            index: newIndex,
         });
         this.setCurrentTab();
     }
@@ -31,12 +31,17 @@ class TabSlide {
             throw new Error('请在 <nb-tab-slide> 标签内输入 div为容器的选项卡内容.');
         }
         [].forEach.call(tabItems, (item, i) => {
+            this.setWidth(item, tabItems.length);
             item.classList.toggle('active', i === this.index);
             item.onclick = () => {
                 this.index = i;
             };
         });
         this.setSlideLeft();
+    }
+    setWidth(item, length) {
+        item.style.width = `${(100 / length)}%`;
+        item.style.textAlign = `center`;
     }
     setSlideLeft() {
         const slide = this.el.shadowRoot.querySelector('.slide');
@@ -53,7 +58,7 @@ class TabSlide {
     render() {
         return (h("div", { class: "container", style: {
                 width: this.tabContainerWidth,
-                height: this.tabContainerHeight
+                height: this.tabContainerHeight,
             } },
             h("slot", null),
             h("div", { class: "slide", style: Object.assign({ visibility: this.slideLeft === '0px' ? 'hidden' : 'visible', left: String(this.slideLeft) }, this.slidePositionStyle) })));
@@ -93,7 +98,7 @@ class TabSlide {
             "cancelable": true,
             "composed": true
         }]; }
-    static get style() { return ".container.sc-nb-tab-slide{position:relative;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;-webkit-justify-content:space-around;-ms-flex-pack:distribute;justify-content:space-around}.container.sc-nb-tab-slide   .slide.sc-nb-tab-slide{width:.5333333333333333rem;height:.05333333333333334rem;background:#3e86f7;position:absolute;-webkit-transition:left .2s ease;transition:left .2s ease}"; }
+    static get style() { return ".container{position:relative;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;-webkit-justify-content:space-around;-ms-flex-pack:distribute;justify-content:space-around}.container .slide{width:.5333333333333333rem;height:.05333333333333334rem;background:#3e86f7;position:absolute;-webkit-transition:left .2s ease;transition:left .2s ease}"; }
 }
 
 export { TabSlide as NbTabSlide };

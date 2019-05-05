@@ -1,10 +1,6 @@
 export class HeaderNav {
     constructor() {
-        this.styles = {
-            height: 88,
-            background: '#ffffff',
-            color: '#272727'
-        };
+        this.styles = {};
         this.line = false;
         this.titlePosition = 'center';
         this.space = 30;
@@ -12,12 +8,17 @@ export class HeaderNav {
         this.visible = true;
     }
     get containerStyles() {
+        const defaultStyles = {
+            height: 88,
+            background: '#ffffff',
+            color: '#272727'
+        };
         const height = `${(this.styles.height || 88) / 75}rem`;
         const width = `${(750 - this.space * 2) / 75}rem`;
         const padding = `0 ${this.space / 75}rem`;
         const position = this.fixed > 0 ? 'fixed' : 'relative';
         const zIndex = this.fixed;
-        return Object.assign({}, this.styles, { padding,
+        return Object.assign({}, defaultStyles, this.styles, { padding,
             width,
             height,
             position,

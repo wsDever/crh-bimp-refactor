@@ -2,11 +2,7 @@ import { h } from '../nb-component.core.js';
 
 class HeaderNav {
     constructor() {
-        this.styles = {
-            height: 88,
-            background: '#ffffff',
-            color: '#272727'
-        };
+        this.styles = {};
         this.line = false;
         this.titlePosition = 'center';
         this.space = 30;
@@ -14,12 +10,17 @@ class HeaderNav {
         this.visible = true;
     }
     get containerStyles() {
+        const defaultStyles = {
+            height: 88,
+            background: '#ffffff',
+            color: '#272727'
+        };
         const height = `${(this.styles.height || 88) / 75}rem`;
         const width = `${(750 - this.space * 2) / 75}rem`;
         const padding = `0 ${this.space / 75}rem`;
         const position = this.fixed > 0 ? 'fixed' : 'relative';
         const zIndex = this.fixed;
-        return Object.assign({}, this.styles, { padding,
+        return Object.assign({}, defaultStyles, this.styles, { padding,
             width,
             height,
             position,
@@ -74,7 +75,7 @@ class HeaderNav {
             "cancelable": true,
             "composed": true
         }]; }
-    static get style() { return ".header.sc-nb-header-nav{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between;font-size:.48rem}"; }
+    static get style() { return ".header{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between;font-size:.48rem}"; }
 }
 
 export { HeaderNav as NbHeaderNav };

@@ -47,6 +47,10 @@ nb-header-nav {
       text-align: center;
       font-size: 36px;
     }
+    &.left {
+      font-size: 40px;
+      font-weight: 500;
+    }
   }
   .right {
     min-width: 100px;

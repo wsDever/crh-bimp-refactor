@@ -44,6 +44,10 @@ export declare class TabSlide {
      */
     private setCurrentTab;
     /**
+     * 设置每个tabItem宽度
+     */
+    private setWidth;
+    /**
      * 根据当前激活 index 以及 tab总宽度来计算 slide 应该设置的 left 距离
      */
     private setSlideLeft;

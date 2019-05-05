@@ -18,6 +18,15 @@ export default [
   {
     name: 'home',
     path: '/',
+    meta: {
+      header: {
+        title: '首页',
+        position: 'left',
+        styles: {
+          height: 96,
+        }
+      }
+    },
     component: () =>
       import(/* webpackChunkName: "home-page" */ '@page/home/home-page')
   },

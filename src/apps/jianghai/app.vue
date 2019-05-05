@@ -1,10 +1,15 @@
 <template>
-  <div id="app" :class="{
+  <div
+    id="app"
+    :class="{
     [$route.meta.bg||'']: true
-  }">
+  }"
+  >
     <!-- 全局头部，通过路由 meta 来控制内容跟显示 -->
     <nb-header-nav
       v-if="$route.meta.header"
+      :title-position="$route.meta.header.position"
+      ref="header"
       @tap="onHeadNavTap"
     >
       <div
@@ -38,6 +43,16 @@
   @Component({
     components: {
       RouterTransition
+    },
+    watch: {
+      // 因为没办法直接通过 :styles 设置对象数据（react可以？）因此在得到元素通过设置属性的方式实现
+      "$route.meta.header": {
+        handler(header) {
+          this.$nextTick(() => {
+            this.$refs.header.styles = header.styles || {};
+          });
+        }
+      }
     }
   })
   export default class App extends Vue {
@@ -58,10 +73,12 @@
       // 针对特殊的错误 code 做 vue层面的响应
       this.$App.APIObserver.on("response.error", ({ code, hash }) => {
         // 登录超时重登
-        if (code === '-2222') {
-          this.$router.replace({ name: 'login', query: { from: hash } });
+        if (code === "-2222") {
+          this.$router.replace({ name: "login", query: { from: hash } });
         }
       });
     }
+
+    mounted() {}
   }
 </script>
