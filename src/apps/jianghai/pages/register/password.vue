@@ -10,6 +10,7 @@
         <input
           ref="password"
           type="password"
+          maxlength="16"
           placeholder="请输入密码"
         >
       </nb-list-item>
@@ -17,6 +18,7 @@
         <input
           ref="password2"
           type="password"
+          maxlength="16"
           placeholder="确认密码"
         >
       </nb-list-item>
@@ -33,6 +35,9 @@
         <input
           type="text"
           placeholder="输入邀请码"
+          maxlength="5"
+          ref="shareCode"
+          :value="userRegRes.get('share_code')"
         >
       </nb-list-item>
     </nb-list>
@@ -56,23 +61,33 @@
   import Vue from "vue";
   import Component from "vue-class-component";
   import Auth from "@model/auth";
-  import Utils from '@lib/utils';
+  import Utils from "@lib/utils";
   @Component({})
   export default class SetPassword extends Vue {
+    userRegRes = Auth.userRegRes;
 
     /**
      * 提交密码
      */
     async onSubmit({ detail }) {
+      const cmd = this.$route.query.type || "register";
       if (this.$refs.password.value !== this.$refs.password2.value) {
         detail.done();
-        return Utils.nb.toast('确认密码不一致');
+        return Utils.nb.toast("两次输入密码不同，请确认后重新输入");
       }
-      const success = await Auth.setPassword({
+      const setPassSuccess = await Auth.setPassword({
         password: this.$refs.password.value
       });
-      if (!success) {
-        detail.done();
+      if (!setPassSuccess) {
+        return detail.done();
+      }
+      // 如果是注册追加 经纪人注册
+      if (cmd === "register") {
+        const regSuccess = await Auth.brokerRegister({
+          share_code: this.$refs.shareCode.value
+        });
+        if (!setPassSuccess)
+        return detail.done();
       }
     }
 

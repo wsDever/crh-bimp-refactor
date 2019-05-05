@@ -67,11 +67,11 @@
 <style lang="scss" scoped>
   .fade-enter-active,
   .fade-leave-active {
-    transition: height, opacity 0.2s ease;
+    transition: height, opacity 0.1s ease;
   }
 
   .fade-enter,
   .fade-leave-active {
-    opacity: 0.2;
+    opacity: 0.1;
   }
 </style>

@@ -20,13 +20,13 @@
         <div class="verify">
           <nb-button-async
             countdown-id="verifycode"
-            :countdown="60"
+            :countdown="10"
             countdown-html="%ns重新获取"
             width="200"
             bg="#ffffff"
             color="#3E86F7"
             no-border
-            @count="onCountdown"
+            @count="onSendVerifyCode"
             ref="verifyBtn"
           >
             <div class="btn">
@@ -73,34 +73,45 @@
   import Utils from "@lib/utils";
   @Component({})
   export default class Register extends Vue {
-
     // 是否已经发送过验证码
     isVerifyCodeSended = false;
+
+    /**
+     * 处理成功后下一页的路由判断
+     */
+    nextPageRoute(cmd) {
+      const routeName = {
+        register: "register.agreement",
+        find: "register.password"
+      }[cmd];
+      this.$router.push({
+        name: routeName,
+        query: this.$route.query
+      });
+    }
 
     // 下一步
     async onNext({ detail }) {
       const mobile_tel = this.$refs.mobile.value;
-      const cmd = this.$route.query.type || 'register';
+      const cmd = this.$route.query.type || "register";
       const isExist = await Auth.isMobileExist({ mobile_tel });
+      if (isExist === false) return detail.done();
       // 先检查手机号是否已经注册过
-      if (cmd === 'register') {
+      if (cmd === "register") {
         if (isExist == 1) {
           detail.done();
           return Utils.nb.modal("alert", {
-            title: '提示',
-            content: "此号码已被使用",
+            title: "提示",
+            content: "此号码已被使用"
           });
-        }
-        if (isExist === false) {
-          return detail.done();
         }
       }
       // 判断是否点击过验证获取
       if (!this.isVerifyCodeSended) {
         detail.done();
         return Utils.nb.modal("alert", {
-          title: '提示',
-          content: "请先获取验证码",
+          title: "提示",
+          content: "请先获取验证码"
         });
       }
       // 先校验验证码
@@ -110,18 +121,15 @@
           sms_code: this.$refs.code.value
         });
         if (success) {
-          cmd === 'register' && this.$router.push({
-            name: "register.agreement",
-            query: this.$route.query
-          });
+          this.nextPageRoute(cmd);
         }
       } finally {
         detail.done();
       }
     }
 
-    // 处理倒计时开关
-    async onCountdown({ detail }) {
+    // 发送验证码(处理倒计时开关)
+    async onSendVerifyCode({ detail }) {
       if (detail.status === "start") {
         // 发验证码请求
         const success = await Auth.sendVerifyCode({

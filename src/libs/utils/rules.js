@@ -6,5 +6,9 @@ export default {
   // 密码
   password(str) {
     return /^[0-9A-Za-z]{6,16}$/.test(str);
+  },
+  // 邀请码
+  shareCode(str) {
+    return /^[0-9a-zA-Z]*$/g.test(str);
   }
 }

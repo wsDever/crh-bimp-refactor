@@ -31,6 +31,11 @@ class AuthModel {
   userLoginRes = observable.map({});
 
   /**
+   * 保存注册流程中保存的用户信息
+   */
+  userRegRes = observable.map({});
+
+  /**
    * 用户登录
    * account_content	String	登录账号
       password	String	密码
@@ -67,7 +72,7 @@ class AuthModel {
   async isMobileExist(params) {
     if (!(await this.validMobile(params.mobile_tel))) return false;
     const { data } = await XHR.post('/snp/CRH-SNP2049', params);
-    return data.register;
+    return data.register; // 1:存在 0:不存在
   }
 
   /**

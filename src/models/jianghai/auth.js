@@ -7,12 +7,30 @@ import Utils from '@lib/utils';
 class AuthModel extends Auth {
 
   /**
+   * 寄存入参接口拿到的所有签署业务协议内容
+   */
+  _signAgreementCollection = [];
+
+  /**
+   * 签署协议入参获取
+   */
+  async signAgreementParams() {
+    const { agreement_busin_type } = await Config.client();
+    const { data } = await XHR.post('/snp/CRH-SNP3058', {
+      busin_type: agreement_busin_type
+    });
+    this._signAgreementCollection =  data.data;
+  }
+
+  /**
    * 注册前 获取签约流程协议
+   * 注意：目前只会获得协议列表里第一份协议内容
    * agreement_no	String	协议编号
       agreement_version	String	协议版本号
    */
   async agreement() {
-    const { agreement_no, agreement_version } = await Config.client();
+    await this.signAgreementParams();
+    const { agreement_no, agreement_version } = this._signAgreementCollection[1];
     const { data } = await XHR.post('/snp/CRH-SNP3055', {
       agreement_no,
       agreement_version
@@ -29,13 +47,14 @@ class AuthModel extends Auth {
     digest_info	String[]	 摘要信息
    */
   async signAgreement() {
+    const agreementData = this._signAgreementCollection[1];
     try {
       await XHR.post('/snp/CRH-SNP3056', {
-        econtract_no: 1,
-        econtract_name: '江海经济圈用户注册协议',
-        econtract_md5: '199af248bf32473f92630bca7d937289',
-        sign_value: 123,
-        digest_info: 123
+        econtract_no: agreementData.agreement_no,
+        econtract_name: agreementData.agreement_name,
+        econtract_md5: agreementData.content_md5,
+        sign_value: agreementData.agreement_content_type,
+        digest_info: agreementData.econtract_content,
       });
       return true;
     }
@@ -46,18 +65,18 @@ class AuthModel extends Auth {
 
   
   /**
-   * 准经纪人注册
+   * 准经纪人注册，前置（设置密码）
    * share_code	String	邀请人邀请编号
      mac_address	String	mac地址
    */
   @action
   async brokerRegister(params) {
-    if (params.share_code.length === 0) {
-      Utils.nb.toast('请输入邀请码');
+    if (!Utils.rules.shareCode(params.share_code)) {
+      Utils.nb.toast('邀请码格式错误');
       return false;
     }
     try {
-      const { data } = await XHR.post('/snp/CRH-SNP2053', params);
+      await XHR.post('/snp/CRH-SNP2053', params);
       return true;
     } catch (e) {
       return false;
@@ -84,7 +103,7 @@ class AuthModel extends Auth {
       runInAction(() => {
         Object.keys(data).map(key => {
           if (!~['error_no', 'error_info'].indexOf(key)) {
-            this.userLoginRes.set(key, data[key]);
+            this.userRegRes.set(key, data[key]);
           }
           // token 加入 session
           if (key === 'token') {

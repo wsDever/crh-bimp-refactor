@@ -22,6 +22,7 @@ export class ButtonAsync {
         const originEl = this.el.querySelector(this.countdownOrigin);
         this.disable = false;
         this.loading = false;
+        this.countdownTimer = null;
         this.countdownDisplay = 0;
         sessionStorage.removeItem(COUNTDOWN_SESSION + this.countdownId);
         this.count.emit({
