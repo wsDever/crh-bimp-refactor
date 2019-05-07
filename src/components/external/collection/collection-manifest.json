@@ -951,6 +951,11 @@
           "attr": "rate"
         },
         {
+          "name": "styleId",
+          "type": "String",
+          "attr": "style-id"
+        },
+        {
           "name": "uploadText",
           "type": "String",
           "attr": "upload-text"

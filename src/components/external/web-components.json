@@ -537,6 +537,11 @@
           "required": false
         },
         {
+          "label": "style-id",
+          "description": "自定义样式追加",
+          "required": false
+        },
+        {
           "label": "upload-text",
           "description": "提示上传按钮的文案",
           "required": false

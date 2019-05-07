@@ -5,6 +5,10 @@ import { EventEmitter } from '../../../stencil.core';
  */
 export declare class UploadSimpleImage {
     /**
+     * 自定义样式追加
+     */
+    styleId: string;
+    /**
      * 最多能上传几张
      */
     maxLength: number;

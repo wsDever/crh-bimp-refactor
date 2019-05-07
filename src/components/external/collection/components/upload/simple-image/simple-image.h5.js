@@ -4,6 +4,7 @@ const ICONS = {
 };
 export class UploadSimpleImage {
     constructor() {
+        this.styleId = '';
         this.maxLength = 4;
         this.imageSize = 1024 * 4;
         this.rate = 2;
@@ -153,9 +154,9 @@ export class UploadSimpleImage {
     }
     render() {
         return [
-            h("div", { class: "upload-images" },
+            h("div", { class: `upload-images ${this.styleId}` },
                 this.previewImages.map(img => {
-                    return (h("div", { class: "preview", style: Object.assign({}, this.previewStyles, { backgroundImage: `url(${img.url || img.base64})` }) },
+                    return (h("div", { class: "preview", style: Object.assign({}, this.previewStyles, { background: `url(${img.url || img.base64}) no-repeat center / cover` }) },
                         h("i", { innerHTML: ICONS.qingchu, onClick: this.removeImage.bind(this, img) })));
                 }),
                 this.previewImages.length < this.maxLength && (h("div", { class: "up-btn", style: Object.assign({}, this.previewStyles), onClick: this.selectImage.bind(this) },
@@ -199,6 +200,10 @@ export class UploadSimpleImage {
         "rate": {
             "type": Number,
             "attr": "rate"
+        },
+        "styleId": {
+            "type": String,
+            "attr": "style-id"
         },
         "uploadText": {
             "type": String,

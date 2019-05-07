@@ -33,7 +33,7 @@ export class HeaderNav {
         return (h("div", { class: "header", style: Object.assign({}, this.containerStyles) },
             this.titlePosition === 'center' && (h("div", { class: "left", onClick: this.handleClick.bind(this, 'left') },
                 h("slot", { name: "left" }))),
-            h("div", { class: "title" },
+            h("div", { class: `title ${this.titlePosition}` },
                 h("slot", { name: "title" })),
             h("div", { class: "right", onClick: this.handleClick.bind(this, 'right') },
                 h("slot", { name: "right" }))));
