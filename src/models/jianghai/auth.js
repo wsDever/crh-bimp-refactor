@@ -33,7 +33,7 @@ class AuthModel extends Auth {
           this.userLoginRes.set(key, data[key]);
         }
         // 用户信息加入 session
-        sessionStorage.setItem(Config.accountLocalName, JSON.stringify(this.userLoginRes.toJSON()));
+        sessionStorage.setItem(Config.userInfoSessName, JSON.stringify(this.userLoginRes.toJSON()));
         // token 加入 session
         if (key === 'token') {
           sessionStorage.setItem(Config.tokenSessName, data.token);
