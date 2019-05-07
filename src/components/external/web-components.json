@@ -258,6 +258,11 @@
           "required": false
         },
         {
+          "label": "background",
+          "description": "提示文字区域的背景色",
+          "required": false
+        },
+        {
           "label": "lock-refresh",
           "description": "禁用下拉刷新",
           "required": false

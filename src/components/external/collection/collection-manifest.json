@@ -619,6 +619,11 @@
           "attr": "auto-scroll-load"
         },
         {
+          "name": "background",
+          "type": "String",
+          "attr": "background"
+        },
+        {
           "name": "lockRefresh",
           "type": "Boolean",
           "attr": "lock-refresh"

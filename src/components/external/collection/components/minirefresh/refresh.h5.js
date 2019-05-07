@@ -4,7 +4,8 @@ export class Refresh {
         this.lockRefresh = false;
         this.lockScrollLoad = false;
         this.autoScrollLoad = false;
-        this.offset = 60;
+        this.offset = 40;
+        this.background = 'none';
         this.refreshOptions = {};
         this.scrollLoadOptions = {};
     }
@@ -35,10 +36,16 @@ export class Refresh {
                     });
                 } }, scrollLoadOptions)
         });
+        const downwrap = container.querySelector('.downwrap-content');
+        const upwrap = container.querySelector('.minirefresh-upwrap');
+        downwrap.style.background = this.background;
+        upwrap.style.background = this.background;
     }
     render() {
         return (h("div", { class: "minirefresh-wrap" },
-            h("div", { class: "minirefresh-scroll" },
+            h("div", { class: "minirefresh-scroll", style: {
+                    backgroundColor: this.background
+                } },
                 h("slot", null))));
     }
     static get is() { return "nb-refresh"; }
@@ -47,6 +54,10 @@ export class Refresh {
         "autoScrollLoad": {
             "type": Boolean,
             "attr": "auto-scroll-load"
+        },
+        "background": {
+            "type": String,
+            "attr": "background"
         },
         "el": {
             "elementRef": true

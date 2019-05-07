@@ -29,6 +29,10 @@ export declare class Refresh {
      */
     offset: number;
     /**
+     * 提示文字区域的背景色
+     */
+    background: string;
+    /**
      * 下拉刷新文案方面的配置
      * 参数	参数类型	默认值	说明
         isWrapCssTranslate	Boolean	false	是否下拉时wrap（下拉区域不是内容区域，与scroll区分开）会跟随css translate
